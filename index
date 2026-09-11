@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบฝึกหัดเตรียมสอบ วิชาวิทยาศาสตร์และเทคโนโลยี 1</title>
+    <style>
+        :root {
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
+            --subtext-color: #64748b;
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --border-color: #e2e8f0;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+            --header-bg: #0f172a;
+            --header-text: #ffffff;
+            --badge-bg: #e0e7ff;
+            --badge-text: #3730a3;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --subtext-color: #94a3b8;
+            --primary-color: #3b82f6;
+            --primary-hover: #60a5fa;
+            --border-color: #334155;
+            --success-color: #34d399;
+            --error-color: #f87171;
+            --header-bg: #020617;
+            --header-text: #f8fafc;
+            --badge-bg: #312e81;
+            --badge-text: #c7d2fe;
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: background-color 0.25s, color 0.25s, border-color 0.25s;
+        }
+
+        body {
+            font-family: 'Sarabun', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        header p {
+            margin: 4px 0 0 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .theme-toggle-btn {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .theme-toggle-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.8rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            margin-top: 0;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.6rem;
+            font-size: 1.25rem;
+        }
+
+        ol, ul {
+            padding-left: 1.2rem;
+            margin-bottom: 0;
+        }
+
+        li {
+            margin-bottom: 0.6rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: var(--badge-bg);
+            color: var(--badge-text);
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+
+        .question {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .option-btn {
+            width: 100%;
+            text-align: left;
+            background-color: transparent;
+            border: 1.5px solid var(--border-color);
+            color: var(--text-color);
+            padding: 0.9rem 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--primary-color);
+            background-color: var(--bg-color);
+        }
+
+        .option-btn.correct {
+            background-color: var(--success-color) !important;
+            color: #ffffff !important;
+            border-color: var(--success-color) !important;
+        }
+
+        .option-btn.wrong {
+            background-color: var(--error-color) !important;
+            color: #ffffff !important;
+            border-color: var(--error-color) !important;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+
+        .next-btn, .restart-btn {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .next-btn:hover, .restart-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .score-board {
+            text-align: center;
+            padding: 1.5rem 0;
+        }
+
+        .score-board h3 {
+            font-size: 1.8rem;
+            margin: 0 0 0.5rem 0;
+            color: var(--primary-color);
+        }
+
+        .score-board p {
+            color: var(--subtext-color);
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <h1>วิชาวิทยาศาสตร์และเทคโนโลยี 1 (ว 21105)</h1>
+            <p>ภาคเรียนที่ 1 - ครูนิสากร คาบทอง</p>
+        </div>
+        <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">
+            <span id="themeIcon">🌙</span> <span id="themeText">Dark Mode</span>
+        </button>
+    </header>
+
+    <div class="container">
+
+        <!-- Topic Overview Card -->
+        <div class="card">
+            <h2>หัวข้อออกสอบปลายภาค (30 ข้อ 10 คะแนน)</h2>
+            <ol>
+                <li>ธาตุกัมมันตรังสี การแผ่รังสีของธาตุกัมมันตรังสี กัมมันตภาพรังสี</li>
+                <li>วิวัฒนาการของแบบจำลองอะตอม</li>
+                <li>อนุภาคมูลฐานของอะตอม</li>
+                <li>การเขียนสัญลักษณ์นิวเคลียร์ ไอโซโทป ไอโซโทน ไอโซบาร์</li>
+                <li>สารประกอบ</li>
+                <li>สารผสม สารละลาย คอลลอยด์ สารแขวนลอย</li>
+                <li>การเจริญเติบโตของพืช</li>
+                <li>เทคโนโลยีชีวภาพสำหรับพืช</li>
+            </ol>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="card">
+            <span class="badge" id="quiz-progress">ข้อที่ 1 จาก 30</span>
+            <div id="quiz-box">
+                <div class="question" id="question-text">กำลังโหลดคำถาม...</div>
+                <div class="options-list" id="options-container"></div>
+                <div class="controls">
+                    <div></div>
+                    <button class="next-btn" id="next-btn" onclick="nextQuestion()" style="display: none;">ข้อถัดไป</button>
+                </div>
+            </div>
+
+            <!-- Score Results -->
+            <div id="score-box" class="score-board" style="display: none;">
+                <h3 id="score-title">คำนวณคะแนน...</h3>
+                <p id="score-subtitle">คุณทำแบบทดสอบครบทั้ง 30 ข้อเรียบร้อยแล้ว!</p>
+                <button class="restart-btn" onclick="restartQuiz()">ทำแบบทดสอบอีกครั้ง</button>
+            </div>
+        </div>
+
+        <!-- Material Card -->
+        <div class="card">
+            <h2>เอกสารสำหรับอ่านเตรียมตัวสอบ</h2>
+            <ul>
+                <li>หนังสือเรียนวิทยาศาสตร์ เล่มสีม่วง หน้า 18–33, หน้า 91–94, หน้า 106–110</li>
+                <li>เอกสารประกอบการสอนเรื่อง วิวัฒนาการของแบบจำลองอะตอม</li>
+                <li>เอกสารประกอบการสอนเรื่อง การเขียนสัญลักษณ์นิวเคลียร์</li>
+                <li>เอกสารประกอบการสอนเรื่อง ธาตุกัมมันตรังสี</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <script>
+        const questions = [
+            // ธาตุกัมมันตรังสี
+            {
+                question: "1. รังสีชนิดใดที่มีอำนาจในการทะลุทะลวงสูงที่สุด สามารถเบี่ยงเบนในสนามแม่เหล็กไม่ได้?",
+                options: ["รังสีแอลฟา", "รังสีบีตา", "รังสีแกมมา", "รังสีเอ็กซ์"],
+                answer: 2
+            },
+            {
+                question: "2. รังสีแอลฟา (Alpha ray) ประกอบด้วยอนุภาคชนิดใด?",
+                options: ["นิวเคลียสของฮีเลียม", "อิเล็กตรอน", "โปรตอน", "โฟตอนความถี่สูง"],
+                answer: 0
+            },
+            {
+                question: "3. ข้อใดคือประโยชน์ของไอโซโทปรังสี คาร์บอน-14 (C-14)?",
+                options: ["ตรวจการทำงานของต่อมไทรอยด์", "คำนวณอายุของวัตถุโบราณ", "ถนอมอาหาร", "รักษาโรคก่อมะเร็ง"],
+                answer: 1
+            },
+            {
+                question: "4. ปรากฏการณ์ที่ธาตุแผ่รังสีออกมาอย่างต่อเนื่องเนื่องจากนิวเคลียสไม่เสถียร เรียกว่าอะไร?",
+                options: ["ปฏิกิริยาเคมี", "กัมมันตภาพรังสี", "การตกผลึก", "การกลั่นลำดับส่วน"],
+                answer: 1
+            },
+
+            // วิวัฒนาการของแบบจำลองอะตอม
+            {
+                question: "5. นักวิทยาศาสตร์ท่านใดเสนอว่า 'อะตอมเป็นทรงกลมตันและแบ่งแยกไม่ได้'?",
+                options: ["จอห์น ดอลตัน", "เจ เจ ทอมสัน", "เออร์เนสต์ รัทเทอร์ฟอร์ด", "นีลส์ โบร์"],
+                answer: 0
+            },
+            {
+                question: "6. เจ เจ ทอมสัน ค้นพบอนุภาคใดในอะตอมจากการทดลองหลอดรังสีแคโทด?",
+                options: ["โปรตอน", "นิวตรอน", "อิเล็กตรอน", "โพซิตรอน"],
+                answer: 2
+            },
+            {
+                question: "7. การทดลองยิงอนุภาคแอลฟาไปยังแผ่นทองคำบางๆ เป็นการทดลองของนักวิทยาศาสตร์ท่านใด?",
+                options: ["ดอลตัน", "ทอมสัน", "รัทเทอร์ฟอร์ด", "แชดวิก"],
+                answer: 2
+            },
+            {
+                question: "8. แบบจำลองอะตอมของนีลส์ โบร์ อธิบายการเคลื่อนที่ของอิเล็กตรอนไว้อย่างไร?",
+                options: ["อัดแน่นอยู่ในนิวเคลียส", "เคลื่อนที่กระจายอยู่รอบๆ อย่างกระจัดกระจาย", "เคลื่อนที่เป็นชั้นๆ ตามระดับพลังงาน", "เคลื่อนที่เป็นคลื่นหมอกหนาแน่น"],
+                answer: 2
+            },
+
+            // อนุภาคมูลฐานของอะตอม
+            {
+                question: "9. ข้อใดคืออนุภาคมูลฐานทั้ง 3 ชนิดของอะตอม?",
+                options: ["โปรตอน, นิวตรอน, อิเล็กตรอน", "โปรตอน, โพซิตรอน, อิเล็กตรอน", "นิวตรอน, ไอโซโทป, อิเล็กตรอน", "อัลฟา, บีตา, แกมมา"],
+                answer: 0
+            },
+            {
+                question: "10. อนุภาคใดในอะตอมที่มีประจุไฟฟ้าเป็นกลาง (ประจุ 0)?",
+                options: ["โปรตอน", "อิเล็กตรอน", "นิวตรอน", "นิวเคลียส"],
+                answer: 2
+            },
+            {
+                question: "11. ศูนย์กลางของอะตอมที่เรียกว่า 'นิวเคลียส' ประกอบด้วยอนุภาคใดบ้าง?",
+                options: ["โปรตอน และ อิเล็กตรอน", "โปรตอน และ นิวตรอน", "นิวตรอน และ อิเล็กตรอน", "อิเล็กตรอนอย่างเดียว"],
+                answer: 1
+            },
+
+            // การเขียนสัญลักษณ์นิวเคลียร์ ไอโซโทป ไอโซโทน ไอโซบาร์
+            {
+                question: "12. ในสัญลักษณ์นิวเคลียร์ ᴬⲬ᲻ ตัวเลขด้านบน (A) หมายถึงสิ่งใด?",
+                options: ["เลขอะตอม", "เลขมวล", "จำนวนอิเล็กตรอน", "จำนวนนิวตรอน"],
+                answer: 1
+            },
+            {
+                question: "13. อะตอมชนิดเดียวกันที่มีจำนวนโปรตอนเท่ากัน แต่จำนวนนิวตรอนต่างกัน เรียกว่าอะไร?",
+                options: ["ไอโซโทป", "ไอโซโทน", "ไอโซบาร์", "ไอโซเมอร์"],
+                answer: 0
+            },
+            {
+                question: "14. ธาตุต่างชนิดกันที่มี 'เลขมวล (A)' เท่ากัน จัดเป็นอะไรกัน?",
+                options: ["ไอโซโทป", "ไอโซโทน", "ไอโซบาร์", "ไอโซเมอร์"],
+                answer: 2
+            },
+            {
+                question: "15. ธาตุต่างชนิดกันที่มี 'จำนวนนิวตรอน (N)' เท่ากัน จัดเป็นอะไรกัน?",
+                options: ["ไอโซโทป", "ไอโซโทน", "ไอโซบาร์", "ไอโซเมอร์"],
+                answer: 1
+            },
+
+            // สารประกอบ
+            {
+                question: "16. ข้อใดจัดเป็นสารประกอบ (Compound)?",
+                options: ["ก๊าซออกซิเจน (O₂)", "น้ำ (H₂O)", "ทองคำ (Au)", "เหล็ก (Fe)"],
+                answer: 1
+            },
+            {
+                question: "17. สารประกอบเกิดขึ้นได้อย่างไร?",
+                options: ["ธาตุชนิดเดียวมารวมกัน", "ธาตุตั้งแต่ 2 ชนิดขึ้นไปมารวมกันทางเคมีในอัตราส่วนที่แน่นอน", "สารผสมมารวมกันโดยไม่เกิดปฏิกิริยา", "สารละลายที่ตกตะกอน"],
+                answer: 1
+            },
+            {
+                question: "18. ข้อใดต่อไปนี้ **ไม่ใช่** สารประกอบ?",
+                options: ["เกลือแก่ง (NaCl)", "แก๊สคาร์บอนไดออกไซด์ (CO₂)", "แก๊สไนโตรเจน (N₂)", "น้ำตาลกลูโคส (C₆H₁₂O₆)"],
+                answer: 2
+            },
+
+            // สารผสม สารละลาย คอลลอยด์ สารแขวนลอย
+            {
+                question: "19. สารผสมที่มีขนาดอนุภาคใหญ่กว่า 10⁻⁴ เซนติเมตร เมื่อตั้งทิ้งไว้จะตกตะกอน คือสารประเภทใด?",
+                options: ["สารละลาย", "คอลลอยด์", "สารแขวนลอย", "สารบริสุทธิ์"],
+                answer: 2
+            },
+            {
+                question: "20. ปรากฏการณ์ทินดอลล์ (Tyndall Effect) หรือการกระเจิงแสง สามารถพบได้ในสารชนิดใด?",
+                options: ["สารละลาย", "คอลลอยด์", "สารบริสุทธิ์", "สารเนื้อเดียว"],
+                answer: 1
+            },
+            {
+                question: "21. ข้อใดจัดเป็นสารละลาย (Solution)?",
+                options: ["นมสด", "น้ำหมอก", "น้ำเกลือ", "น้ำแป้ง"],
+                answer: 2
+            },
+            {
+                question: "22. สารสลายที่มีตัวทำละลายและตัวละลายเป็นของแข็งทั้งคู่ เช่น ทองเหลือง เรียกว่าอะไร?",
+                options: ["สารโลหะเจือ (Alloy)", "อิมัลชัน", "แอโรซอล", "ไฮโดรซอล"],
+                answer: 0
+            },
+
+            // การเจริญเติบโตของพืช
+            {
+                question: "23. กระบวนการใดของพืชที่นำแก๊สคาร์บอนไดออกไซด์และน้ำมาสร้างน้ำตาลกลูโคส?",
+                options: ["การหายใจระดับเซลล์", "การสังเคราะห์ด้วยแสง", "การคายน้ำ", "การดูดซึมแร่ธาตุ"],
+                answer: 1
+            },
+            {
+                question: "24. ธาตุอาหารหลัก (Macro-nutrients) ที่จำเป็นต่อการเจริญเติบโตของพืชคือข้อใด?",
+                options: ["ไนโตรเจน, ฟอสฟอรัส, โพแทสเซียม", "แคลเซียม, แมกนีเซียม, กำมะถัน", "เหล็ก, สังกะสี, ทองแดง", "โบรอน, โมลิบดีนัม, คลอรีน"],
+                answer: 0
+            },
+            {
+                question: "25. โครงสร้างใดของใบพืชที่ทำหน้าที่ควบคุมการแลกเปลี่ยนแก๊สและการคายน้ำ?",
+                options: ["ท่อลำเลียงน้ำ (Xylem)", "ปากใบ (Stomata)", "คลอโรพลาสต์", "ผนังเซลล์"],
+                answer: 1
+            },
+            {
+                question: "26. ฮอร์โมนพืชชนิดใดที่มีบทบาทสำคัญในการเร่งการเจริญเติบโตของเซลล์และการยืดตัวของลำต้น?",
+                options: ["ออซิน (Auxin)", "เอทิลีน (Ethylene)", "กรดแอบไซซิก (ABA)", "ไซโทไคนิน"],
+                answer: 0
+            },
+
+            // เทคโนโลยีชีวภาพสำหรับพืช
+            {
+                question: "27. การเพาะเลี้ยงเนื้อเยื่อพืช (Plant Tissue Culture) อาศัยคุณสมบัติใดของเซลล์พืช?",
+                options: ["Totipotency (เซลล์สามารถเจริญเป็นต้นสมบูรณ์ได้)", "Photosynthesis", "Osmosis", "Mutation"],
+                answer: 0
+            },
+            {
+                question: "28. ประโยชน์หลักของการเพาะเลี้ยงเนื้อเยื่อพืชคือข้อใด?",
+                options: ["ขยายพันธุ์พืชปริมาณมากที่ปลอดโรคในเวลาอันรวดเร็ว", "ทำให้พืชมีขนาดใหญ่ขึ้น 10 เท่า", "เปลี่ยนพืชใบเลี้ยงคู่เป็นใบเลี้ยงเดี่ยว", "ลดความจำเป็นในการใช้น้ำ"],
+                answer: 0
+            },
+            {
+                question: "29. พืช GMOs (Genetically Modified Organisms) คือพืชที่มีลักษณะอย่างไร?",
+                options: ["พืชที่ปลูกในน้ำโดยไม่ใช้ดิน", "พืชที่ได้รับการดัดแปรพันธุกรรมด้วยเทคโนโลยีชีวภาพ", "พืชที่ใช้ปุ๋ยเคมีเข้มข้น", "พืชที่เพาะเมล็ดในห้องแล็บ"],
+                answer: 1
+            },
+            {
+                question: "30. การใช้พันธุวิศวกรรมตัดต่อยีน Bt เข้าไปในพืช เช่น ฝ้าย หรือ ข้าวโพด มีวัตถุประสงค์เพื่ออะไร?",
+                options: ["ต้านทานแมลงศัตรูพืช", "ชะลอการสุกของผลไม้", "ทนทานต่อความแห้งแล้ง", "เพิ่มปริมาณวิตามินเอ"],
+                answer: 0
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        const questionElement = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const nextButton = document.getElementById('next-btn');
+        const quizBox = document.getElementById('quiz-box');
+        const scoreBox = document.getElementById('score-box');
+        const progressElement = document.getElementById('quiz-progress');
+
+        function loadQuestion() {
+            const currentQ = questions[currentQuestionIndex];
+            progressElement.style.display = 'inline-block';
+            progressElement.textContent = `ข้อที่ ${currentQuestionIndex + 1} จาก ${questions.length}`;
+            questionElement.textContent = currentQ.question;
+            optionsContainer.innerHTML = '';
+            nextButton.style.display = 'none';
+
+            currentQ.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.classList.add('option-btn');
+                button.onclick = () => selectOption(index, button);
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        function selectOption(selectedIndex, selectedBtn) {
+            const currentQ = questions[currentQuestionIndex];
+            const buttons = optionsContainer.getElementsByClassName('option-btn');
+
+            for (let btn of buttons) {
+                btn.disabled = true;
+            }
+
+            if (selectedIndex === currentQ.answer) {
+                selectedBtn.classList.add('correct');
+                score++;
+            } else {
+                selectedBtn.classList.add('wrong');
+                buttons[currentQ.answer].classList.add('correct');
+            }
+
+            nextButton.style.display = 'block';
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            quizBox.style.display = 'none';
+            progressElement.style.display = 'none';
+            scoreBox.style.display = 'block';
+            const scaledScore = ((score / questions.length) * 10).toFixed(1);
+            document.getElementById('score-title').textContent = `คะแนนของคุณ: ${score} / ${questions.length} (${scaledScore} / 10 คะแนนจริง)`;
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            quizBox.style.display = 'block';
+            scoreBox.style.display = 'none';
+            loadQuestion();
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.body.getAttribute('data-theme');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+
+            if (currentTheme === 'dark') {
+                document.body.removeAttribute('data-theme');
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Dark Mode';
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Light Mode';
+            }
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>
