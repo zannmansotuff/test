@@ -152,6 +152,52 @@
             pointer-events: none;
         }
 
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .giant-author-wrapper {
+            margin: 0.5rem auto 2.25rem;
+            text-align: center;
+            position: relative;
+            z-index: 5;
+        }
+
+        .giant-author-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.4rem 1.4rem;
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 9999px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: #f8fafc;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+        }
+
+        .giant-author-text {
+            font-size: clamp(3.5rem, 11vw, 7.5rem);
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #ff3b30, #ff9500, #ff2d55, #af52de, #5856d6, #007aff, #34c759);
+            background-size: 400% 400%;
+            animation: gradientShift 6s ease infinite;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 6px 28px rgba(175, 82, 222, 0.6));
+            line-height: 1.05;
+            margin: 0;
+            user-select: none;
+        }
+
         .hero-content {
             position: relative;
             max-width: 850px;
@@ -586,7 +632,12 @@
 
     <!-- Hero Section -->
     <header class="hero">
-        <div class="hero-content">
+            <!-- Giant Author Banner -->
+            <div class="giant-author-wrapper">
+                <div class="giant-author-tag">⚡ FINAL EXAM PORTAL ⚡</div>
+                <div class="giant-author-text">MADE BY ZANN</div>
+            </div>
+
             <div class="hero-badge">
                 <span>🎯</span>
                 <span>ระบบฝึกทำข้อสอบเสมือนจริง • พร้อมเฉลยและวิธีคิดทันที</span>
@@ -879,6 +930,9 @@
     <!-- Footer -->
     <footer>
         <div class="footer-content">
+            <div style="font-size: clamp(2rem, 6vw, 3.5rem); font-weight: 900; letter-spacing: 0.12em; background: linear-gradient(135deg, #f43f5e, #a855f7, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; text-transform: uppercase;">
+                MADE BY ZANN
+            </div>
             <p><strong>Grade 7 Final Exam Practice Hub</strong> • แหล่งรวบรวมข้อสอบเตรียมสอบปลายภาค ม.1</p>
             <div class="footer-links">
                 <a href="bio.html">ชีววิทยา</a> • 
