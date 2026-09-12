@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบฝึกหัดเตรียมสอบปลายภาค ประวัติศาสตร์ ม.1 (ปี 69)</title>
+    <style>
+        :root {
+            --bg-color: #fdf8f6;
+            --card-bg: #ffffff;
+            --text-color: #0f172a;
+            --subtext-color: #475569;
+            --primary-color: #c2410c;
+            --primary-hover: #9a3412;
+            --border-color: #ffedd5;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+            --header-bg: #7c2d12;
+            --header-text: #ffffff;
+            --badge-bg: #ffedd5;
+            --badge-text: #9a3412;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1a0c06;
+            --card-bg: #431407;
+            --text-color: #f8fafc;
+            --subtext-color: #fdba74;
+            --primary-color: #fb923c;
+            --primary-hover: #f97316;
+            --border-color: #7c2d12;
+            --success-color: #34d399;
+            --error-color: #f87171;
+            --header-bg: #270903;
+            --header-text: #f8fafc;
+            --badge-bg: #7c2d12;
+            --badge-text: #fed7aa;
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: background-color 0.25s, color 0.25s, border-color 0.25s;
+        }
+
+        body {
+            font-family: 'Sarabun', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        header p {
+            margin: 4px 0 0 0;
+            font-size: 0.9rem;
+            opacity: 0.85;
+        }
+
+        .theme-toggle-btn {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .theme-toggle-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.8rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            margin-top: 0;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.6rem;
+            font-size: 1.25rem;
+        }
+
+        ul {
+            padding-left: 1.2rem;
+            margin-bottom: 0;
+        }
+
+        li {
+            margin-bottom: 0.4rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: var(--badge-bg);
+            color: var(--badge-text);
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+
+        .question {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .option-btn {
+            width: 100%;
+            text-align: left;
+            background-color: transparent;
+            border: 1.5px solid var(--border-color);
+            color: var(--text-color);
+            padding: 0.9rem 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--primary-color);
+            background-color: var(--bg-color);
+        }
+
+        .option-btn.correct {
+            background-color: var(--success-color) !important;
+            color: #ffffff !important;
+            border-color: var(--success-color) !important;
+        }
+
+        .option-btn.wrong {
+            background-color: var(--error-color) !important;
+            color: #ffffff !important;
+            border-color: var(--error-color) !important;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 1.5rem;
+        }
+
+        .next-btn, .restart-btn {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .next-btn:hover, .restart-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .score-board {
+            text-align: center;
+            padding: 1.5rem 0;
+        }
+
+        .score-board h3 {
+            font-size: 1.8rem;
+            margin: 0 0 0.5rem 0;
+            color: var(--primary-color);
+        }
+
+        .score-board p {
+            color: var(--subtext-color);
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <h1>วิชา ประวัติศาสตร์ ม.1 (สอบปลายภาค ปี 69)</h1>
+            <p>ข้อสอบกากบาท 40 ข้อ (20 คะแนน) | ตรงตามโน้ตสรุปทุกประเด็น</p>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+            <a href="index.html" class="theme-toggle-btn" style="text-decoration: none; background-color: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.35);">
+                <span>🏠</span> <span>หน้าหลัก</span>
+            </a>
+            <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">
+                <span id="themeIcon">🌙</span> <span id="themeText">Dark Mode</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Topic Card -->
+        <div class="card">
+            <h2>ขอบเขตเนื้อหาตามสรุป (40 ข้อ)</h2>
+            <ul>
+                <li><strong>เรื่องที่ 1:</strong> เวลา, ศักราช (พ.ศ. ค.ศ. ม.ศ. จ.ศ. ร.ศ. ฮ.ศ.), ทศวรรษ/ศตวรรษ/สหัสวรรษ, ยุคหิน/โลหะ, ขั้นตอนวิธีการทางประวัติศาสตร์ 5 ขั้น (หน้า 4-11, 20)</li>
+                <li><strong>เรื่องที่ 2:</strong> พัฒนาการเอเชียตะวันออกเฉียงใต้ (SEA), ลมมรสุม, อิทธิพลจีน-อินเดีย, ช่องแคบมะละกา, รัฐโบราณ (ฟูนัน, พุกาม, มัจฉาปาหิต), อิทธิพลชาติตะวันตก (มาร์โค โปโล, มาเจลลัน, สนธิสัญญาอังกฤษ-ฮอลันดา)</li>
+            </ul>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="card">
+            <span class="badge" id="quiz-progress">ข้อที่ 1 จาก 40</span>
+            <div id="quiz-box">
+                <div class="question" id="question-text">กำลังโหลดคำถาม...</div>
+                <div class="options-list" id="options-container"></div>
+                <div class="controls">
+                    <button class="next-btn" id="next-btn" onclick="nextQuestion()" style="display: none;">ข้อถัดไป ➔</button>
+                </div>
+            </div>
+
+            <!-- Score Results -->
+            <div id="score-box" class="score-board" style="display: none;">
+                <h3 id="score-title">คำนวณคะแนน...</h3>
+                <p id="score-subtitle">คุณทำแบบทดสอบทบทวนเนื้อหาประวัติศาสตร์ ม.1 ครบ 40 ข้อแล้ว!</p>
+                <button class="restart-btn" onclick="restartQuiz()">ทำแบบทดสอบอีกครั้ง 🔄</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const questions = [
+            // เรื่องที่ 1: เวลา ศักราช ยุคสมัย และวิธีการทางประวัติศาสตร์ (ข้อ 1 - 20)
+            {
+                question: "1. การศึกษาช่วงเวลาและยุคสมัยทางประวัติศาสตร์มีความสำคัญอย่างไรมากที่สุด?",
+                options: ["ช่วยให้ลำดับเหตุการณ์ก่อน-หลังได้อย่างถูกต้อง", "ช่วยจำชื่อบุคคลสำคัญได้แม่นยำขึ้น", "ช่วยให้พยากรณ์อนาคตได้อย่างเที่ยงตรง", "ช่วยลดขั้นตอนในการวิเคราะห์หลักฐาน"],
+                answer: 0
+            },
+            {
+                question: "2. ศักราชใดที่นิยมใช้อย่างเป็นทางการในประเทศไทยในปัจจุบัน โดยเริ่มนับหลังจากพระพุทธเจ้าปรินิพพาน?",
+                options: ["คริสต์ศักราช (ค.ศ.)", "พุทธศักราช (พ.ศ.)", "มหาศักราช (ม.ศ.)", "รัตนโกสินทร์ศก (ร.ศ.)"],
+                answer: 1
+            },
+            {
+                question: "3. 'รัตนโกสินทร์ศก (ร.ศ.)' เริ่มนับ ร.ศ. 1 ในปีที่สถาปนากรุงเทพมหานครเป็นราชธานี ซึ่งตรงกับ พ.ศ. ใด?",
+                options: ["พ.ศ. 2325", "พ.ศ. 2310", "พ.ศ. 1826", "พ.ศ. 2475"],
+                answer: 0
+            },
+            {
+                question: "4. ฮิจเราะห์ศักราช (ฮ.ศ.) เป็นศักราชของศาสนาใด และเริ่มนับจากเหตุการณ์ใด?",
+                options: ["ศาสนาพุทธ - พระพุทธเจ้าประสูติ", "ศาสนาคริสต์ - พระเยซูประสูติ", "ศาสนาอิสลาม - ท่านนบีมุฮัมมัดอพยพไปเมืองเมดินะห์", "ศาสนาฮินดู - การสถาปนาอาณาจักร"],
+                answer: 2
+            },
+            {
+                question: "5. 'ทศวรรษ' หมายถึงช่วงเวลากี่ปี?",
+                options: ["10 ปี", "50 ปี", "100 ปี", "1,000 ปี"],
+                answer: 0
+            },
+            {
+                question: "6. 'ศตวรรษ' และ 'สหัสวรรษ' หมายถึงช่วงเวลากี่ปีตามลำดับ?",
+                options: ["10 ปี และ 100 ปี", "100 ปี และ 1,000 ปี", "1,000 ปี และ 10,000 ปี", "100 ปี และ 500 ปี"],
+                answer: 1
+            },
+            {
+                question: "7. การแบ่งยุคสมัยทางประวัติศาสตร์เป็น 'สมัยก่อนประวัติศาสตร์' และ 'สมัยประวัติศาสตร์' ใช้สิ่งใดเป็นเกณฑ์?",
+                options: ["การตั้งถิ่นฐานเป็นเมือง", "การรู้จักประดิษฐ์ตัวอักษรใช้บันทึก", "การรู้จักใช้ไฟ", "การค้นพบโลหะ"],
+                answer: 1
+            },
+            {
+                question: "8. เครื่องมือหินกะเทาะอย่างหยาบๆ ล่าสัตว์และย้ายถิ่นฐานตามแหล่งอาหาร เป็นลักษณะของมนุษย์ในยุคใด?",
+                options: ["ยุคหินเก่า", "ยุคหินกลาง", "ยุคหินใหม่", "ยุคสำริด"],
+                answer: 0
+            },
+            {
+                question: "9. มนุษย์เริ่มรู้จักการเพาะปลูก เลี้ยงสัตว์ ทำขวานหินขัด และตั้งถิ่นฐานถาวรในยุคใด?",
+                options: ["ยุคหินเก่า", "ยุคหินกลาง", "ยุคหินใหม่", "ยุคเหล็ก"],
+                answer: 2
+            },
+            {
+                question: "10. 'ยุคโลหะ' ในสมัยก่อนประวัติศาสตร์ เริ่มต้นจากการนำแร่ใดมาผสมกันเป็น 'สำริด'?",
+                options: ["ทองแดง ผสม ตะกั่ว", "ทองแดง ผสม ดีบุก", "เหล็ก ผสม ทองคำ", "ดีบุก ผสม สังกะสี"],
+                answer: 1
+            },
+            {
+                question: "11. โลหะชนิดใดที่มีความแข็งแกร่งทนทานมากกว่าสำริด และนำมาใช้ทำอาวุธและเครื่องมือการเกษตรในยุคโลหะช่วงต่อมา?",
+                options: ["ทองคำ", "เงิน", "เหล็ก", "ทองแดง"],
+                answer: 2
+            },
+            {
+                question: "12. หลักฐานทางประวัติศาสตร์ที่เป็นลายลักษณ์อักษร ได้แก่ข้อใด?",
+                options: ["จารึก ศิลาจารึก พงศาวดาร", "โครงกระดูกมนุษย์โบราณ", "ขวานหินขัด", "เครื่องประดับกำไลดินเผา"],
+                answer: 0
+            },
+            {
+                question: "13. หลักฐานชั้นต้น (Primary Sources) หมายถึงข้อใด?",
+                options: ["หนังสือเรียนประวัติศาสตร์", "หลักฐานที่สร้างขึ้นในร่วมสมัยหรืออยู่ในเหตุการณ์นั้นจริง", "บทความวิเคราะห์ของนักประวัติศาสตร์ยุคปัจจุบัน", "ภาพยนตร์ประวัติศาสตร์"],
+                answer: 1
+            },
+            {
+                question: "14. ข้อใดคือขั้นตอนแรกของ 'วิธีการทางประวัติศาสตร์ 5 ขั้นตอน' (หน้า 20)?",
+                options: ["การรวบรวมหลักฐาน", "การกำหนดหัวเรื่อง/ประเด็นที่จะศึกษา", "การประเมินคุณค่าของหลักฐาน", "การเรียบเรียงและนำเสนอ"],
+                answer: 1
+            },
+            {
+                question: "15. ขั้นตอนการตรวจสอบความถูกต้อง ความน่าเชื่อถือ และความแท้จริงของหลักฐาน เรียกว่าอะไร?",
+                options: ["การกำหนดหัวข้อ", "การรวบรวมหลักฐาน", "การประเมินคุณค่าหลักฐาน (วิพากษ์หลักฐาน)", "การตีความหลักฐาน"],
+                answer: 2
+            },
+            {
+                question: "16. ขั้นตอนสุดท้ายของวิธีการทางประวัติศาสตร์คือข้อใด?",
+                options: ["การรวบรวมหลักฐาน", "การประเมินคุณค่าหลักฐาน", "การสังเคราะห์ข้อมูล", "การเรียบเรียงและการนำเสนอ"],
+                answer: 3
+            },
+            {
+                question: "17. ข้อใดเรียงลำดับขั้นตอนวิธีการทางประวัติศาสตร์ 5 ขั้นตอนได้ถูกต้อง?",
+                options: [
+                    "กำหนดหัวข้อ ➔ รวบรวมหลักฐาน ➔ ประเมินคุณค่า ➔ ตีความข้อมูล ➔ เรียบเรียงนำเสนอ",
+                    "รวบรวมหลักฐาน ➔ กำหนดหัวข้อ ➔ ตีความข้อมูล ➔ ประเมินคุณค่า ➔ เรียบเรียงนำเสนอ",
+                    "กำหนดหัวข้อ ➔ ตีความข้อมูล ➔ รวบรวมหลักฐาน ➔ ประเมินคุณค่า ➔ เรียบเรียงนำเสนอ",
+                    "ประเมินคุณค่า ➔ กำหนดหัวข้อ ➔ รวบรวมหลักฐาน ➔ ตีความข้อมูล ➔ เรียบเรียงนำเสนอ"
+                ],
+                answer: 0
+            },
+            {
+                question: "18. มหาศักราช (ม.ศ.) เป็นศักราชที่ได้รับอิทธิพลมาจากประเทศใด และนิยมใช้ในศิลาจารึกสมัยสุโขทัย?",
+                options: ["จีน", "อินเดีย", "เปอร์เซีย", "ลังกา"],
+                answer: 1
+            },
+            {
+                question: "19. จุลศักราช (จ.ศ.) เริ่มนับในประเทศใดก่อนจะแพร่หลายเข้ามาในดินแดนไทย?",
+                options: ["พม่า (พุกาม)", "เขมร", "จีน", "เวียดนาม"],
+                answer: 0
+            },
+            {
+                question: "20. หากต้องการแปลง พ.ศ. เป็น ค.ศ. จะต้องนำตัวเลขใดไปลบ?",
+                options: ["543", "1181", "2325", "638"],
+                answer: 0
+            },
+
+            // เรื่องที่ 2: พัฒนาการเอเชียตะวันออกเฉียงใต้ (ข้อ 21 - 40)
+            {
+                question: "21. ลักษณะภูมิประเทศของเอเชียตะวันออกเฉียงใต้ (SEA) แบ่งออกเป็น 2 ส่วนหลักคือข้อใด?",
+                options: ["ส่วนภาคพื้นทวีป และ ส่วนหมู่เกาะ", "ส่วนทะเลทราย และ ส่วนที่ราบสูง", "ส่วนเขตขั้วโลก และ ส่วนเขตร้อน", "ส่วนเทือกเขาสูง และ ส่วนที่ราบลุ่มน้ำแม่กลอง"],
+                answer: 0
+            },
+            {
+                question: "22. ปัจจัยทางธรรมชาติใดที่มีอิทธิพลต่อการเดินเรือและการค้าขายของพ่อค้าในภูมิภาคเอเชียตะวันออกเฉียงใต้?",
+                options: ["ลมมรสุมตะวันออกเฉียงเหนือ และ ลมมรสุมตะวันตกเฉียงใต้", "พายุหิมะ", "กระแสน้ำอุ่นคุโรชิโว", "ลมพายุทอร์นาโด"],
+                answer: 0
+            },
+            {
+                question: "23. ช่องแคบที่มีความสำคัญทางยุทธศาสตร์และการค้าเส้นทางทะเลระหว่างอินเดียกับจีนใน SEA คือช่องแคบใด?",
+                options: ["ช่องแคบไต้หวัน", "ช่องแคบมะละกา", "ช่องแคบเบริง", "ช่องแคบจิบรอลตาร์"],
+                answer: 1
+            },
+            {
+                question: "24. การค้าแบบระบบบรรณาการ (จิ้มก้อง) เป็นรูปแบบความสัมพันธ์ทางการค้าระหว่างรัฐใน SEA กับประเทศใด?",
+                options: ["อินเดีย", "จีน", "เปอร์เซีย", "ฮอลันดา"],
+                answer: 1
+            },
+            {
+                question: "25. บุคคลกลุ่มใดที่เป็นตัวกลางสำคัญในการนำอารยธรรมและศาสนาจากอินเดียเข้ามาเผยแผ่ในภูมิภาค SEA?",
+                options: ["ทหาร และ ขุนนาง", "พ่อค้า และ นักบวช (พราหมณ์/พระสงฆ์)", "เกษตรกร และ ช่างฝีมือ", "นักสำรวจชาวตะวันตก"],
+                answer: 1
+            },
+            {
+                question: "26. รัฐโบราณแห่งแรกในภูมิภาคเอเชียตะวันออกเฉียงใต้ คือรัฐใด?",
+                options: ["อาณาจักรฟูนัน (Funan)", "อาณาจักรพุกาม", "อาณาจักรมัจฉาปาหิต", "อาณาจักรศรีวิชัย"],
+                answer: 0
+            },
+            {
+                question: "27. เมืองท่าทางผ่านการค้าที่สำคัญที่สุดของ 'อาณาจักรฟูนัน' คือเมืองใด (ตามโน้ตสรุป)?",
+                options: ["เมืองออกแก้ว (Oc Eo)", "เมืองมะละกา", "เมืองปาเล็มบัง", "เมืองอู่ทอง"],
+                answer: 0
+            },
+            {
+                question: "28. 'อาณาจักรพุกาม' ในดินแดนพม่า เจริญรุ่งเรืองด้านพุทธศาสนา แต่ต่อมาเสื่อมอำนาจลงเนื่องจากการรุกรานของชนชาติใด?",
+                options: ["ชาวจีนมองโกล (กุบไลข่าน)", "ชาวอังกฤษ", "ชาวฝรั่งเศส", "ชาวโปรตุเกส"],
+                answer: 0
+            },
+            {
+                question: "29. 'อาณาจักรมัจฉาปาหิต' เป็นอาณาจักรทางทะเลยิ่งใหญ่ที่สุดซึ่งมีศูนย์กลางการปกครองอยู่ที่เกาะใด?",
+                options: ["เกาะสุมาตรา", "เกาะชวา", "เกาะบอร์เนียว", "เกาะสิงคโปร์"],
+                answer: 1
+            },
+            {
+                question: "30. แม้ศาสนาอิสลามจะเริ่มเข้ามาแพร่หลาย แตกษัตริย์ (King) ของอาณาจักรมัจฉาปาหิตยังคงนับถือศาสนาใดเป็นหลัก?",
+                options: ["ศาสนาพราหมณ์-ฮินดู และ พระพุทธศาสนา", "ศาสนาคริสต์", "ศาสนาขงจื๊อ", "ศาสนาเชน"],
+                answer: 0
+            },
+            {
+                question: "31. ชาติตะวันตกคนแรกที่เดินทางเข้ามาบันทึกเรื่องราวในภูมิภาคเอเชีย (ชาวอิตาลี) คือใคร?",
+                options: ["มาร์โค โปโล (Marco Polo)", "เฟอร์ดินันด์ มาเจลลัน", "วาสโก ดา กามา", "คริสโตเฟอร์ โคลัมบัส"],
+                answer: 0
+            },
+            {
+                question: "32. นักเดินเรือชาวสเปนที่เดินทางรอบโลกและเดินทางมาถึงหมู่เกาะฟิลิปปินส์คือใคร?",
+                options: ["มาร์โค โปโล", "เฟอร์ดินันด์ มาเจลลัน (Ferdinand Magellan)", "กัปตันเจมส์ คุก", "ลอร์ดเจมส์"],
+                answer: 1
+            },
+            {
+                question: "33. ชาติตะวันตกใดได้ทำสนธิสัญญาจัดสรรและแลกเปลี่ยนผลประโยชน์ในดินแดน SEA ร่วมกัน (ตามโน้ตสรุป)?",
+                options: ["อังกฤษ กับ ฮอลันดา (เนเธอร์แลนด์)", "สเปน กับ ฝรั่งเศส", "โปรตุเกส กับ อเมริกา", "อิตาลี กับ รัสเซีย"],
+                answer: 0
+            },
+            {
+                question: "34. สิ่งใดที่เอเชียตะวันออกเฉียงใต้รับมาจากอารยธรรมอินเดีย?",
+                options: ["ศาสนาพราหมณ์-ฮินดู พุทธศาสนา และภาษาภาษาสันสกฤต", "ระบบการสอบจอหงวน", "การใช้ตะเกียบ", "การทำกระดาษและเข็มทิศ"],
+                answer: 0
+            },
+            {
+                question: "35. อารยธรรมจีนส่งผลต่อภูมิภาคเอเชียตะวันออกเฉียงใต้ในด้านใดมากที่สุด?",
+                options: ["ระบบการค้า บรรณาการ และเทคโนโลยีการเดินเรือ/การทำเครื่องเบญจรงค์", "การสร้างปราสาทหิน", "วรรณคดีเรื่องรามายณะ", "แนวคิดเรื่องเทวราชา"],
+                answer: 0
+            },
+            {
+                question: "36. การแบ่งกลุ่มประเทศใน SEA ออกเป็น 'กลุ่มประเทศภาคพื้นทวีป' ข้อใดถูกต้อง?",
+                options: ["เมียนมา ไทย ลาว กัมพูชา เวียดนาม", "อินโดนีเซีย ฟิลิปปินส์ บรูไน", "สิงคโปร์ ติมอร์-เลสเต อินโดนีเซีย", "ไทย บรูไน ฟิลิปปินส์"],
+                answer: 0
+            },
+            {
+                question: "37. การแบ่งกลุ่มประเทศใน SEA ออกเป็น 'กลุ่มประเทศหมู่เกาะ' ข้อใดถูกต้อง?",
+                options: ["อินโดนีเซีย ฟิลิปปินส์ บรูไน ติมอร์-เลสเต", "ไทย ลาว พม่า เวียดนาม", "กัมพูชา ลาว ไทย", "เมียนมา กัมพูชา ลาว"],
+                answer: 0
+            },
+            {
+                question: "38. เมืองหลวงของอาณาจักรพุกามโบราณ ขึ้นชื่อในเรื่องใดทางพุทธศาสนา?",
+                options: ["เจดีย์และวัดหลายพันองค์", "พระพุทธรูปทองคำขนาดใหญ่ที่สุดในโลก", "นครวัดนครธม", "ถ้ำอชันตา"],
+                answer: 0
+            },
+            {
+                question: "39. จุดประสงค์หลักของการเข้ามาของชาติตะวันตกในเอเชียตะวันออกเฉียงใต้ในยุคแรกเริ่มคือข้อใด?",
+                options: ["การแสวงหาเครื่องเทศ สินค้ามีค่า และการเผยแผ่ศาสนา", "การนำเทคโนโลยีคอมพิวเตอร์มาขาย", "การท่องเที่ยวพักผ่อน", "การหาแรงงานไปสร้างบ้าน"],
+                answer: 0
+            },
+            {
+                question: "40. ข้อใดสรุปความสำคัญของภูมิภาคเอเชียตะวันออกเฉียงใต้ทางด้านภูมิศาสตร์ได้ถูกต้องที่สุด?",
+                options: ["เป็นจุดเชื่อมต่อการทางเรือระหว่างมหาสมุทรอินเดียและมหาสมุทรแปซิฟิก", "เป็นศูนย์กลางความหนาวเย็นของโลก", "เป็นจุดศูนย์กลางของการทำนาบนเขาหิมะ", "เป็นดินแดนที่ไม่มีลมมรสุมพัดผ่าน"],
+                answer: 0
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        const questionElement = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const nextButton = document.getElementById('next-btn');
+        const quizBox = document.getElementById('quiz-box');
+        const scoreBox = document.getElementById('score-box');
+        const progressElement = document.getElementById('quiz-progress');
+
+        function loadQuestion() {
+            const currentQ = questions[currentQuestionIndex];
+            progressElement.style.display = 'inline-block';
+            progressElement.textContent = `ข้อที่ ${currentQuestionIndex + 1} จาก ${questions.length}`;
+            questionElement.textContent = currentQ.question;
+            optionsContainer.innerHTML = '';
+            nextButton.style.display = 'none';
+
+            currentQ.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.classList.add('option-btn');
+                button.onclick = () => selectOption(index, button);
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        function selectOption(selectedIndex, selectedBtn) {
+            const currentQ = questions[currentQuestionIndex];
+            const buttons = optionsContainer.getElementsByClassName('option-btn');
+
+            for (let btn of buttons) {
+                btn.disabled = true;
+            }
+
+            if (selectedIndex === currentQ.answer) {
+                selectedBtn.classList.add('correct');
+                score++;
+            } else {
+                selectedBtn.classList.add('wrong');
+                buttons[currentQ.answer].classList.add('correct');
+            }
+
+            nextButton.style.display = 'block';
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            quizBox.style.display = 'none';
+            progressElement.style.display = 'none';
+            scoreBox.style.display = 'block';
+            const finalScore20 = ((score / questions.length) * 20).toFixed(1);
+            document.getElementById('score-title').textContent = `คะแนนของคุณ: ${score} / ${questions.length} (คิดเป็น ${finalScore20} / 20 คะแนน)`;
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            quizBox.style.display = 'block';
+            scoreBox.style.display = 'none';
+            loadQuestion();
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.body.getAttribute('data-theme');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+
+            if (currentTheme === 'dark') {
+                document.body.removeAttribute('data-theme');
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Dark Mode';
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Light Mode';
+            }
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>

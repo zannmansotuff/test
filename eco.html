@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบฝึกหัดเตรียมสอบ วิชา Economics (อ.ตฤณห์)</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #0f172a;
+            --subtext-color: #475569;
+            --primary-color: #059669;
+            --primary-hover: #047857;
+            --border-color: #e2e8f0;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+            --header-bg: #064e3b;
+            --header-text: #ffffff;
+            --badge-bg: #d1fae5;
+            --badge-text: #065f46;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #062016;
+            --card-bg: #064e3b;
+            --text-color: #f8fafc;
+            --subtext-color: #a7f3d0;
+            --primary-color: #34d399;
+            --primary-hover: #059669;
+            --border-color: #047857;
+            --success-color: #34d399;
+            --error-color: #f87171;
+            --header-bg: #022c22;
+            --header-text: #f8fafc;
+            --badge-bg: #047857;
+            --badge-text: #d1fae5;
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: background-color 0.25s, color 0.25s, border-color 0.25s;
+        }
+
+        body {
+            font-family: 'Sarabun', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        header p {
+            margin: 4px 0 0 0;
+            font-size: 0.9rem;
+            opacity: 0.85;
+        }
+
+        .theme-toggle-btn {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .theme-toggle-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.8rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            margin-top: 0;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.6rem;
+            font-size: 1.25rem;
+        }
+
+        ul {
+            padding-left: 1.2rem;
+            margin-bottom: 0;
+        }
+
+        li {
+            margin-bottom: 0.4rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: var(--badge-bg);
+            color: var(--badge-text);
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+
+        .question {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .option-btn {
+            width: 100%;
+            text-align: left;
+            background-color: transparent;
+            border: 1.5px solid var(--border-color);
+            color: var(--text-color);
+            padding: 0.9rem 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--primary-color);
+            background-color: var(--bg-color);
+        }
+
+        .option-btn.correct {
+            background-color: var(--success-color) !important;
+            color: #ffffff !important;
+            border-color: var(--success-color) !important;
+        }
+
+        .option-btn.wrong {
+            background-color: var(--error-color) !important;
+            color: #ffffff !important;
+            border-color: var(--error-color) !important;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 1.5rem;
+        }
+
+        .next-btn, .restart-btn {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .next-btn:hover, .restart-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .score-board {
+            text-align: center;
+            padding: 1.5rem 0;
+        }
+
+        .score-board h3 {
+            font-size: 1.8rem;
+            margin: 0 0 0.5rem 0;
+            color: var(--primary-color);
+        }
+
+        .score-board p {
+            color: var(--subtext-color);
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <h1>วิชา Economic (สอบปลายภาค)</h1>
+            <p>อาจารย์ตฤณห์ | ข้อสอบกากบาท 4 ตัวเลือก 20 ข้อ</p>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+            <a href="index.html" class="theme-toggle-btn" style="text-decoration: none; background-color: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.35);">
+                <span>🏠</span> <span>หน้าหลัก</span>
+            </a>
+            <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">
+                <span id="themeIcon">🌙</span> <span id="themeText">Dark Mode</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Topic Card -->
+        <div class="card">
+            <h2>แนวข้อสอบ บทที่ 1 - 5 (20 ข้อ)</h2>
+            <ul>
+                <li>ความหมาย ความสำคัญ เศรษฐศาสตร์จุลภาค และ มหภาค</li>
+                <li>ปัญหาพื้นฐานทางเศรษฐศาสตร์ (What / How / For whom) & ค่าเสียโอกาส</li>
+                <li>กฎอุปสงค์ (Demand) และ กฎอุปทาน (Supply), ราคาและปริมาณดุลยภาพ</li>
+                <li>หน่วยเศรษฐกิจ, ระบบเศรษฐกิจ (ทุนนิยม สังคมนิยม ผสม ดั้งเดิม)</li>
+                <li>ปัจจัยการผลิตและผลตอบแทน & สถาบันการเงิน และ ธนาคารกลาง</li>
+            </ul>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="card">
+            <span class="badge" id="quiz-progress">ข้อที่ 1 จาก 20</span>
+            <div id="quiz-box">
+                <div class="question" id="question-text">กำลังโหลดคำถาม...</div>
+                <div class="options-list" id="options-container"></div>
+                <div class="controls">
+                    <button class="next-btn" id="next-btn" onclick="nextQuestion()" style="display: none;">ข้อถัดไป ➔</button>
+                </div>
+            </div>
+
+            <!-- Score Results -->
+            <div id="score-box" class="score-board" style="display: none;">
+                <h3 id="score-title">คำนวณคะแนน...</h3>
+                <p id="score-subtitle">คุณทำแบบทดสอบวิชา Economic ครบถ้วนแล้ว!</p>
+                <button class="restart-btn" onclick="restartQuiz()">ทำแบบทดสอบอีกครั้ง 🔄</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "1. สาเหตุสำคัญที่สุดที่ทำให้เกิดศึกษาวิชาเศรษฐศาสตร์คือข้อใด?",
+                options: ["ทรัพยากรมีจำกัด แต่ความต้องการของมนุษย์มีไม่จำกัด", "ทรัพยากรมีไม่จำกัด แต่ความต้องการของมนุษย์มีจำกัด", "ราคาสินค้าแพงเกินไป", "รัฐบาลจัดเก็บภาษีสูงเกินไป"],
+                answer: 0
+            },
+            {
+                question: "2. การศึกษาพฤติกรรมการตัดสินใจซื้อสินค้าของครัวเรือนและบริษัท จัดเป็นเศรษฐศาสตร์ประเภทใด?",
+                options: ["เศรษฐศาสตร์มหภาค", "เศรษฐศาสตร์จุลภาค", "เศรษฐศาสตร์การเมือง", "เศรษฐศาสตร์พัฒนาการ"],
+                answer: 1
+            },
+            {
+                question: "3. ปัญหาพื้นฐานทางเศรษฐศาสตร์ที่ถามว่า 'จะผลิตสินค้าอะไร' ตรงกับข้อใด?",
+                options: ["HOW", "WHAT", "FOR WHOM", "WHEN"],
+                answer: 1
+            },
+            {
+                question: "4. ปัญหา 'FOR WHOM' ในทางเศรษฐศาสตร์ หมายถึงข้อใด?",
+                options: ["จะใช้เทคโนโลยีอะไรในการผลิต", "จะผลิตสินค้าปริมาณเท่าใด", "จะกระจายสินค้าไปให้ใครและอย่างไร", "จะผลิตเมื่อไหร่"],
+                answer: 2
+            },
+            {
+                question: "5. ค่าเสียโอกาส (Opportunity Cost) เกิดขึ้นเมื่อใด?",
+                options: ["เมื่อเราเลือกทางเลือกหนึ่ง แล้วต้องยอมเสียโอกาสของทางเลือกที่ดีที่สุดอันถัดไป", "เมื่อเราซื้อสินค้าราคาแพงเกินไป", "เมื่อธุรกิจขาดทุน", "เมื่อรัฐบาลเก็บภาษีนำเข้า"],
+                answer: 0
+            },
+            {
+                question: "6. ตามกฎของอุปสงค์ (Law of Demand) เมื่อราคาสินค้าเพิ่มขึ้น ปริมาณความต้องการซื้อจะเป็นอย่างไร?",
+                options: ["เพิ่มขึ้น", "ลดลง", "เท่าเดิม", "ไม่แน่นอน"],
+                answer: 1
+            },
+            {
+                question: "7. ตามกฎของอุปทาน (Law of Supply) ความสัมพันธ์ระหว่างราคาสินค้ากับปริมาณความต้องการขายเป็นอย่างไร?",
+                options: ["แปรผกผันกัน", "แปรผันตามกัน (ทิศทางเดียวกัน)", "ไม่มีความสัมพันธ์กัน", "แปรผันตรงข้ามกันเสมอ"],
+                answer: 1
+            },
+            {
+                question: "8. จุดที่กราฟอุปสงค์ตัดกับกราฟอุปทาน เรียกว่าอะไร?",
+                options: ["จุดขาดแคลน", "จุดล้นตลาด", "จุดดุลยภาพ (Equilibrium)", "จุดกำไรสูงสุด"],
+                answer: 2
+            },
+            {
+                question: "9. หากราคากาแฟสูงขึ้นมาก ผู้บริโภคหันไปดื่มชาแทน ชาและกาแฟจัดเป็นสินค้าประเภทใด?",
+                options: ["สินค้าประกอบกัน", "สินค้าทดแทนกัน", "สินค้าด้อยคุณภาพ", "สินค้าฟุ่มเฟือย"],
+                answer: 1
+            },
+            {
+                question: "10. ข้อใด **ไม่ใช่** ปัจจัยการผลิต และผลตอบแทนที่ถูกต้อง?",
+                options: ["ที่ดิน ➔ ดอกเบี้ย", "แรงงาน ➔ ค่าจ้าง/ค่าแรง", "ทุน ➔ ดอกเบี้ย", "ผู้ประกอบการ ➔ กำไร"],
+                answer: 0
+            },
+            {
+                question: "11. หน่วยเศรษฐกิจใดมีหน้าที่หลักในการให้ปัจจัยการผลิตแก่ภาคธุรกิจ และเป็นผู้บริโภคสินค้า?",
+                options: ["หน่วยธุรกิจ", "หน่วยครัวเรือน", "หน่วยรัฐบาล", "หน่วยสถาบันการเงิน"],
+                answer: 1
+            },
+            {
+                question: "12. ระบบเศรษฐกิจที่เอกชนมีเสรีภาพเต็มที่ในการครอบครองทรัพย์สินและดำเนินกิจกรรมทางเศรษฐกิจ เรียกว่าอะไร?",
+                options: ["ระบบเศรษฐกิจแบบทุนนิยม", "ระบบเศรษฐกิจแบบสังคมนิยม", "ระบบเศรษฐกิจแบบผสม", "ระบบเศรษฐกิจแบบดั้งเดิม"],
+                answer: 0
+            },
+            {
+                question: "13. ระบบเศรษฐกิจของประเทศไทยในปัจจุบัน จัดเป็นระบบเศรษฐกิจแบบใด?",
+                options: ["ทุนนิยมบริสุทธิ์", "คอมมิวนิสต์", "แบบผสม (Mixed Economy)", "แบบดั้งเดิม"],
+                answer: 2
+            },
+            {
+                question: "14. ข้อใดจัดเป็นสถาบันการเงินประเภท 'ธนาคารพาณิชย์'?",
+                options: ["ธนาคารแห่งประเทศไทย", "ธนาคารกสิกรไทย", "ธนาคารออมสิน", "ธนาคารอาคารสงเคราะห์"],
+                answer: 1
+            },
+            {
+                question: "15. ธนาคารการเกษตรและสหกรณ์การเกษตร (ธ.ก.ส.) จัดเป็นสถาบันการเงินประเภทใด?",
+                options: ["ธนาคารพาณิชย์", "สถาบันการเงินเฉพาะกิจของรัฐ", "ธนาคารกลาง", "บริษัทหลักทรัพย์"],
+                answer: 1
+            },
+            {
+                question: "16. หน่วยงานใดทำหน้าที่เป็น 'ธนาคารกลาง' ของประเทศไทย ที่ควบคุมปริมาณเงินและออกธนบัตร?",
+                options: ["กระทรวงการคลัง", "ธนาคารแห่งประเทศไทย", "ธนาคารออมสิน", "ตลาดหลักทรัพย์แห่งประเทศไทย"],
+                answer: 1
+            },
+            {
+                question: "17. หากเกิดปัญหาเงินเฟ้อ ธนาคารกลางมักจะใช้นโยบายการเงินอย่างไรเพื่อชะลอเศรษฐกิจ?",
+                options: ["ปรับลดอัตราดอกเบี้ยนโยบาย", "ปรับขึ้นอัตราดอกเบี้ยนโยบาย", "พิมพ์ธนบัตรเพิ่มขึ้น", "ยกเลิกการเก็บภาษี"],
+                answer: 1
+            },
+            {
+                question: "18. สถาบันการเงินแห่งแรกของประเทศไทย คือข้อใด?",
+                options: ["แบงก์สยามกัมมาจล (ปัจจุบันคือธนาคารไทยพาณิชย์)", "ธนาคารออมสิน", "ธนาคารกรุงไทย", "สยามซิตี้แบงก์"],
+                answer: 0
+            },
+            {
+                question: "19. บุคคลใดต่อไปนี้จัดเป็น 'ผู้ประกอบการ' ในทางเศรษฐศาสตร์?",
+                options: ["พนักงานรับเงินในห้างสรรพสินค้า", "เจ้าของร้านกาแฟที่รวบรวมทุนและแรงงานมาเปิดร้าน", "ผู้ที่นำเงินไปฝากธนาคารเพื่อเอาดอกเบี้ย", "เจ้าของที่ดินที่ปล่อยให้เช่า"],
+                answer: 1
+            },
+            {
+                question: "20. หากสินค้าเกิดภาวะ 'สินค้าล้นตลาด (Surplus)' ราคาของสินค้าในตลาดจะมีแนวโน้มเป็นอย่างไร?",
+                options: ["ปรับตัวสูงขึ้น", "ปรับตัวลดลงเข้าสู่ราคาดุลยภาพ", "เท่าเดิมไม่เปลี่ยนแปลง", "รัฐบาลต้องเข้ามาแจกฟรี"],
+                answer: 1
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        const questionElement = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const nextButton = document.getElementById('next-btn');
+        const quizBox = document.getElementById('quiz-box');
+        const scoreBox = document.getElementById('score-box');
+        const progressElement = document.getElementById('quiz-progress');
+
+        function loadQuestion() {
+            const currentQ = questions[currentQuestionIndex];
+            progressElement.style.display = 'inline-block';
+            progressElement.textContent = `ข้อที่ ${currentQuestionIndex + 1} จาก ${questions.length}`;
+            questionElement.textContent = currentQ.question;
+            optionsContainer.innerHTML = '';
+            nextButton.style.display = 'none';
+
+            currentQ.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.classList.add('option-btn');
+                button.onclick = () => selectOption(index, button);
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        function selectOption(selectedIndex, selectedBtn) {
+            const currentQ = questions[currentQuestionIndex];
+            const buttons = optionsContainer.getElementsByClassName('option-btn');
+
+            for (let btn of buttons) {
+                btn.disabled = true;
+            }
+
+            if (selectedIndex === currentQ.answer) {
+                selectedBtn.classList.add('correct');
+                score++;
+            } else {
+                selectedBtn.classList.add('wrong');
+                buttons[currentQ.answer].classList.add('correct');
+            }
+
+            nextButton.style.display = 'block';
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            quizBox.style.display = 'none';
+            progressElement.style.display = 'none';
+            scoreBox.style.display = 'block';
+            document.getElementById('score-title').textContent = `คะแนนของคุณ: ${score} / ${questions.length}`;
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            quizBox.style.display = 'block';
+            scoreBox.style.display = 'none';
+            loadQuestion();
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.body.getAttribute('data-theme');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+
+            if (currentTheme === 'dark') {
+                document.body.removeAttribute('data-theme');
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Dark Mode';
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Light Mode';
+            }
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>

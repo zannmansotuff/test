@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คลังข้อสอบเตรียมสอบปลายภาค ม.1 | Grade 7 Final Exam Practice Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --primary: #3b82f6;
+            --primary-dark: #1d4ed8;
+            --hero-bg: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            --hero-text: #ffffff;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 14px rgba(0,0,0,0.07);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+            --badge-bg: #f1f5f9;
+            --badge-text: #334155;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0b0f19;
+            --card-bg: #151d2f;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #222f46;
+            --primary: #60a5fa;
+            --primary-dark: #3b82f6;
+            --hero-bg: linear-gradient(135deg, #0f172a 0%, #020617 100%);
+            --hero-text: #f8fafc;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 14px rgba(0,0,0,0.35);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.45);
+            --badge-bg: #1e293b;
+            --badge-text: #cbd5e1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+        }
+
+        body {
+            font-family: 'Prompt', 'Sarabun', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Navigation Bar */
+        .navbar {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0.85rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 1.15rem;
+        }
+
+        .nav-logo .logo-icon {
+            font-size: 1.6rem;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.55rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            border: 1px solid var(--border-color);
+            background-color: var(--card-bg);
+            color: var(--text-main);
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--badge-bg);
+            transform: translateY(-1px);
+        }
+
+        .github-btn {
+            background: #24292e;
+            color: #ffffff !important;
+            border: none;
+        }
+        .github-btn:hover {
+            background: #1a1e22;
+        }
+
+        /* Hero Banner */
+        .hero {
+            background: var(--hero-bg);
+            color: var(--hero-text);
+            padding: 3.5rem 1.5rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 140%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(59, 130, 246, 0.15) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.35rem 0.9rem;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(1.8rem, 4vw, 2.75rem);
+            font-weight: 800;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff 30%, #93c5fd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            opacity: 0.9;
+            color: #cbd5e1;
+            margin-bottom: 1.75rem;
+            font-weight: 300;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 14px;
+            padding: 0.9rem 0.5rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #60a5fa;
+            line-height: 1.2;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            color: #cbd5e1;
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem;
+            flex: 1;
+            width: 100%;
+        }
+
+        /* Filter & Search Toolbar */
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .category-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .filter-chip {
+            padding: 0.45rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-muted);
+            transition: all 0.2s ease;
+        }
+
+        .filter-chip:hover {
+            border-color: var(--primary);
+            color: var(--text-main);
+        }
+
+        .filter-chip.active {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.35);
+        }
+
+        .search-box {
+            position: relative;
+            min-width: 260px;
+            flex: 1;
+            max-width: 380px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.6rem 1rem 0.6rem 2.4rem;
+            border-radius: 9999px;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        .search-box .search-icon {
+            position: absolute;
+            left: 0.85rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            pointer-events: none;
+        }
+
+        /* Subjects Grid */
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .subject-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.75rem;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-color, var(--primary));
+        }
+
+        .subject-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--accent-color, var(--primary));
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.2rem;
+        }
+
+        .icon-box {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            background: var(--accent-light, #eff6ff);
+        }
+
+        .badge-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+        }
+
+        .badge-pill {
+            padding: 0.25rem 0.65rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            background: var(--badge-bg);
+            color: var(--badge-text);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            color: var(--text-main);
+            line-height: 1.4;
+        }
+
+        .card-instructor {
+            font-size: 0.85rem;
+            color: var(--accent-color, var(--primary));
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .topics-list {
+            margin-bottom: 1.5rem;
+            background: var(--badge-bg);
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            font-size: 0.825rem;
+            color: var(--text-muted);
+        }
+
+        .topics-list ul {
+            padding-left: 1.1rem;
+            margin: 0;
+        }
+
+        .topics-list li {
+            margin-bottom: 0.25rem;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+        }
+
+        .q-count {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .btn-start {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.65rem 1.35rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.925rem;
+            text-decoration: none;
+            background: var(--accent-color, var(--primary));
+            color: #ffffff !important;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+        .btn-start:hover {
+            filter: brightness(1.1);
+            transform: scale(1.02);
+        }
+
+        /* Tips & Guide Section */
+        .info-section {
+            margin-top: 3.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .info-section h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.25rem;
+            margin-top: 1rem;
+        }
+
+        .tip-box {
+            background: var(--badge-bg);
+            border-radius: 14px;
+            padding: 1.2rem;
+        }
+
+        .tip-box h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 0.35rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tip-box p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .subjects-grid {
+                grid-template-columns: 1fr;
+            }
+            .toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .search-box {
+                max-width: 100%;
+            }
+            .hero {
+                padding: 2.5rem 1rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-icon">📚</span>
+                <span>คลังข้อสอบ ม.1 ปลายภาค</span>
+            </a>
+            <div class="nav-actions">
+                <button class="nav-btn" id="themeToggleBtn" onclick="toggleGlobalTheme()" aria-label="Toggle Theme">
+                    <span id="themeIcon">🌙</span>
+                    <span id="themeText">โหมดมืด</span>
+                </button>
+                <a href="https://github.com/zannmansotuff/test" target="_blank" rel="noopener noreferrer" class="nav-btn github-btn">
+                    <svg height="16" width="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                    </svg>
+                    <span>GitHub Repo</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span>🎯</span>
+                <span>ระบบฝึกทำข้อสอบเสมือนจริง • พร้อมเฉลยและวิธีคิดทันที</span>
+            </div>
+            <h1>คลังแบบฝึกหัดเตรียมสอบปลายภาค ม.1</h1>
+            <p>รวมชุดข้อสอบครบทุกกลุ่มสาระการเรียนรู้ 7 วิชา รวมกว่า 190 ข้อ ตรงตามหลักสูตรและเนื้อหาโน้ตสรุปสอบปลายภาค เพื่อฝึกฝนความแม่นยำก่อนลงสนามจริง</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">7</div>
+                    <div class="stat-label">วิชาเตรียมสอบ</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">190</div>
+                    <div class="stat-label">ข้อสอบทั้งหมด</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">มีเฉลยละเอียด</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">ฟรี</div>
+                    <div class="stat-label">ทำซ้ำได้ไม่จำกัด</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-container">
+        
+        <!-- Controls: Filters & Search -->
+        <div class="toolbar">
+            <div class="category-filters">
+                <button class="filter-chip active" onclick="filterCategory('all')">ทั้งหมด (7)</button>
+                <button class="filter-chip" onclick="filterCategory('sci')">วิทยาศาสตร์ (2)</button>
+                <button class="filter-chip" onclick="filterCategory('math')">คณิตศาสตร์ (1)</button>
+                <button class="filter-chip" onclick="filterCategory('lang')">ภาษา (2)</button>
+                <button class="filter-chip" onclick="filterCategory('social')">สังคม/เศรษฐศาสตร์ (2)</button>
+            </div>
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" oninput="handleSearch()" placeholder="ค้นหาชื่อวิชา ครูผู้สอน หรือเนื้อหา...">
+            </div>
+        </div>
+
+        <!-- Subjects Grid -->
+        <div class="subjects-grid" id="subjectsGrid">
+
+            <!-- 1. ชีววิทยา (Biology) -->
+            <div class="subject-card" data-category="sci" data-keywords="ชีววิทยา พืช ลำเลียง สืบพันธุ์ xylem phloem ธัญญรัตน์ วิทยาศาสตร์" style="--accent-color: #16a34a; --accent-light: #dcfce7;">
+                <div>
+                    <div class="card-top">
+                        <div class="icon-box">🌱</div>
+                        <div class="badge-group">
+                            <span class="badge-pill">วิทยาศาสตร์</span>
+                            <span class="badge-pill">ม.1 ปลายภาค</span>
+                        </div>
+                    </div>
+                    <h2 class="card-title">ชีววิทยา: การลำเลียงและการสืบพันธุ์ของพืช</h2>
+                    <div class="card-instructor">👨‍🏫 ครูธัญญรัตน์ ยาดยอด</div>
+                    <p class="card-desc">ท่อลำเลียง Xylem, Phloem, แรงดึงจากการคายน้ำ, แรงดันราก, โครงสร้างดอก, การถ่ายละอองเรณู และการปฏิสนธิซ้อน</p>
+                    <div class="topics-list">
+                        <ul>
+                            <li>ท่อลำเลียงน้ำและอาหาร (Xylem & Phloem)</li>
+                            <li>การคายน้ำ & ปัจจัยที่มีผลต่อการคายน้ำ</li>
+                            <li>โครงสร้างดอกและวงชีวิตพืชดอก (หน้า 81-103)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="q-count">
+                        <span>📝</span>
+                        <span>30 ข้อ (กากบาท)</span>
+                    </div>
+                    <a href="bio.html" class="btn-start">เริ่มทำข้อสอบ ➔</a>
+                </div>
+            </div>
+
+            <!-- 2. เคมี / สารบริสุทธิ์ (Chemistry / Science) -->
+            <div class="subject-card" data-category="sci" data-keywords="เคมี สารบริสุทธิ์ ธาตุ สารประกอบ ผสม จุดเดือด หลอมเหลว ความหนาแน่น วิทยาศาสตร์" style="--accent-color: #2563eb; --accent-light: #dbeafe;">
+                <div>
+                    <div class="card-top">
+                        <div class="icon-box">🧪</div>
+                        <div class="badge-group">
+                            <span class="badge-pill">วิทยาศาสตร์</span>
+                            <span class="badge-pill">ม.1 ปลายภาค</span>
+                        </div>
+                    </div>
+                    <h2 class="card-title">วิทยาศาสตร์และเทคโนโลยี 1 (สารบริสุทธิ์)</h2>
+                    <div class="card-instructor">🔬 หมวดวิชาวิทยาศาสตร์</div>
+                    <p class="card-desc">สมบัติของสารบริสุทธิ์และสารผสม จุดเดือด จุดหลอมเหลว กราฟอุณหภูมิ ความหนาแน่น มวลและปริมาตร การจำแนกธาตุและสารประกอบ</p>
+                    <div class="topics-list">
+                        <ul>
+                            <li>การเปรียบเทียบจุดเดือดและจุดหลอมเหลว</li>
+                            <li>การคำนวณความหนาแน่น (D = M/V)</li>
+                            <li>ธาตุโลหะ อโลหะ กึ่งโลหะ และธาตุกัมมันตรังสี</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="q-count">
+                        <span>📝</span>
+                        <span>30 ข้อ (กากบาท)</span>
+                    </div>
+                    <a href="chem.html" class="btn-start">เริ่มทำข้อสอบ ➔</a>
+                </div>
+            </div>
+
+            <!-- 3. คณิตศาสตร์พื้นฐาน (Mathematics) -->
+            <div class="subject-card" data-category="math" data-keywords="คณิตศาสตร์ เลข คำนวณ จำนวนเต็ม เศษส่วน ทศนิยม ยกกำลัง เอกนาม พหุนาม math" style="--accent-color: #4f46e5; --accent-light: #e0e7ff;">
+                <div>
+                    <div class="card-top">
+                        <div class="icon-box">📐</div>
+                        <div class="badge-group">
+                            <span class="badge-pill">คณิตศาสตร์</span>
+                            <span class="badge-pill">ระดับท้าทาย</span>
+                        </div>
+                    </div>
+                    <h2 class="card-title">แบบฝึกหัดคณิตศาสตร์พื้นฐาน ม.1</h2>
+                    <div class="card-instructor">🔢 ข้อสอบคณิตศาสตร์เข้มข้น</div>
+                    <p class="card-desc">ทบทวนและฝึกความไวในการคำนวณจำนวนเต็ม เศษส่วน ทศนิยม สมบัติเลขยกกำลัง และการบวก ลบ คูณเอกนามและพหุนาม</p>
+                    <div class="topics-list">
+                        <ul>
+                            <li>การดำเนินการจำนวนเต็ม ลำดับการคำนวณ (Order of Ops)</li>
+                            <li>เศษส่วน ทศนิยมซ้ำ และการตัดทอน</li>
+                            <li>เลขยกกำลัง เอกนามคล้าย และดีกรีพหุนาม</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="q-count">
+                        <span>📝</span>
+                        <span>20 ข้อ (จับเวลา/ตรวจทันที)</span>
+                    </div>
+                    <a href="math.html" class="btn-start">เริ่มทำข้อสอบ ➔</a>
+                </div>
+            </div>
+
+            <!-- 4. ภาษาไทย (Thai) -->
+            <div class="subject-card" data-category="lang" data-keywords="ภาษาไทย วรรณคดี นิราศภูเขาทอง กาพย์เห่ชมเครื่องคาวหวาน คำไทย สุนทรภู่ คำสมาส สนธิ" style="--accent-color: #ea580c; --accent-light: #ffedd5;">
+                <div>
+                    <div class="card-top">
+                        <div class="icon-box">📖</div>
+                        <div class="badge-group">
+                            <span class="badge-pill">ภาษาไทย</span>
+                            <span class="badge-pill">ม.1 ปลายภาค</span>
+                        </div>
+                    </div>
+                    <h2 class="card-title">วิชาภาษาไทย: หลักภาษาและวรรณคดี</h2>
+                    <div class="card-instructor">✍️ ทบทวนหลักภาษา & วรรณคดี</div>
+                    <p class="card-desc">ชนิดของคำ การสร้างคำ ประโยค โวหารภาพพจน์ รสวรรณคดี พร้อมเจาะลึกบทวิเคราะห์นิราศภูเขาทองและกาพย์เห่ชมเครื่องคาวหวาน</p>
+                    <div class="topics-list">
+                        <ul>
+                            <li>หลักภาษา: เสียงในภาษาไทย คำมูล คำซ้อน ประโยค</li>
+                            <li>วรรณคดี: นิราศภูเขาทอง (สุนทรภู่)</li>
+                            <li>กาพย์เห่ชมเครื่องคาวหวาน (ร.2) และอาหารไทยโบราณ</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="q-count">
+                        <span>📝</span>
+                        <span>30 ข้อ (กากบาท)</span>
+                    </div>
+                    <a href="thai.html" class="btn-start">เริ่มทำข้อสอบ ➔</a>
+                </div>
+            </div>
+
+            <!-- 5. ประวัติศาสตร์ ม.1 (History) -->
+            <div class="subject-card" data-category="social" data-keywords="ประวัติศาสตร์ ม.1 เอเชียตะวันออกเฉียงใต้ อาณาจักรโบราณ ทวารวดี ศรีวิชัย อยุธยา สุโขทัย" style="--accent-color: #b45309; --accent-light: #fef3c7;">
+                <div>
+                    <div class="card-top">
+                        <div class="icon-box">🏛️</div>
+                        <div class="badge-group">
+                            <span class="badge-pill">สังคมศึกษา</span>
+                            <span class="badge-pill">ม.1 ปลายภาค ปี 69</span>
+                        </div>
+                    </div>
+                    <h2 class="card-title">วิชาประวัติศาสตร์ ม.1 (สอบปลายภาค)</h2>
+                    <div class="card-instructor">📜 ตามโน้ตสรุป 40 ข้อครบถ้วน</div>
+                    <p class="card-desc">แหล่งอารยธรรมเอเชียตะวันออกเฉียงใต้ แหล่งมรดกโลก รัฐโบราณในดินแดนไทย การสถาปนาสุโขทัย ความสัมพันธ์ระหว่างประเทศ</p>
+                    <div class="topics-list">
+                        <ul>
+                            <li>อารยธรรมลุ่มแม่น้ำและการเข้ามาของอินเดีย/จีน</li>
+                            <li>รัฐโบราณ: ทวารวดี ศรีวิชัย ละโว้ หริภุญชัย โคตรบูรณ์</li>
+                            <li>พัฒนาการทางการเมืองการปกครองและเศรษฐกิจสุโขทัย</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="q-count">
+                        <span>📝</span>
+                        <span>40 ข้อ (20 คะแนนเต็ม)</span>
+                    </div>
+                    <a href="history.html" class="btn-start">เริ่มทำข้อสอบ ➔</a>
+                </div>
+            </div>
+
+            <!-- 6. เศรษฐศาสตร์ (Economics) -->
+            <div class="subject-card" data-category="social" data-keywords="เศรษฐศาสตร์ economics อ.ตฤณห์ ตฤณห์ ปัจจัยการผลิต อุปสงค์ อุปทาน ตลาด เงินเฟ้อ" style="--accent-color: #0d9488; --accent-light: #ccfbf1;">
+                <div>
+                    <div class="card-top">
+                        <div class="icon-box">💰</div>
+                        <div class="badge-group">
+                            <span class="badge-pill">สังคมศึกษา</span>
+                            <span class="badge-pill">ม.1 ปลายภาค</span>
+                        </div>
+                    </div>
+                    <h2 class="card-title">วิชา Economics (เศรษฐศาสตร์)</h2>
+                    <div class="card-instructor">👨‍🏫 อาจารย์ตฤณห์ (บทที่ 1 - 5)</div>
+                    <p class="card-desc">ความหมายและความสำคัญของเศรษฐศาสตร์ ปัจจัยการผลิต การขาดแคลน ค่าเสียโอกาส กลไกราคา อุปสงค์ (Demand) และ อุปทาน (Supply)</p>
+                    <div class="topics-list">
+                        <ul>
+                            <li>ปัจจัยการผลิต 4 ประการ & ผลตอบแทน (ที่ดิน แรงงาน ทุน ผู้ประกอบการ)</li>
+                            <li>กฎของอุปสงค์และอุปทาน การเปลี่ยนแปลงจุดดุลยภาพ</li>
+                            <li>ระบบเศรษฐกิจแบบทุนนิยม สังคมนิยม และแบบผสม</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="q-count">
+                        <span>📝</span>
+                        <span>20 ข้อ (กากบาท 4 ตัวเลือก)</span>
+                    </div>
+                    <a href="eco.html" class="btn-start">เริ่มทำข้อสอบ ➔</a>
+                </div>
+            </div>
+
+            <!-- 7. ภาษาอังกฤษ (SMART ENG 1) -->
+            <div class="subject-card" data-category="lang" data-keywords="อังกฤษ english smart eng วศิน grammar vocabulary reading ครูวศิน tense" style="--accent-color: #9333ea; --accent-light: #f3e8ff;">
+                <div>
+                    <div class="card-top">
+                        <div class="icon-box">🌐</div>
+                        <div class="badge-group">
+                            <span class="badge-pill">ภาษาต่างประเทศ</span>
+                            <span class="badge-pill">SMART ENG</span>
+                        </div>
+                    </div>
+                    <h2 class="card-title">SMART ENG 1 - Final Exam Practice</h2>
+                    <div class="card-instructor">👨‍🏫 ครูวศิน (Wasin)</div>
+                    <p class="card-desc">ข้อสอบภาษาอังกฤษโครงการพิเศษ SMART ENG ครอบคลุม Tenses, Passive Voice, Subject-Verb Agreement, Vocab in Context และ Reading</p>
+                    <div class="topics-list">
+                        <ul>
+                            <li>Grammar Points: Present/Past/Future Perfect & Continuous</li>
+                            <li>Reading Comprehension & Critical Analysis</li>
+                            <li>Vocabulary, Phrasal Verbs & Context Clues</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="q-count">
+                        <span>📝</span>
+                        <span>20 ข้อ (แบบทดสอบมาตรฐาน)</span>
+                    </div>
+                    <a href="eng.html" class="btn-start">เริ่มทำข้อสอบ ➔</a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- No Results Found State -->
+        <div id="noResults" style="display: none; text-align: center; padding: 4rem 1rem; color: var(--text-muted);">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🔍</div>
+            <h3>ไม่พบชุดข้อสอบที่ตรงกับการค้นหา</h3>
+            <p>ลองใช้คำค้นหาอื่น เช่น "วิทย์", "คณิต", "ไทย", "พืช" หรือ "ประวัติศาสตร์"</p>
+        </div>
+
+        <!-- Tips and Guide Section -->
+        <section class="info-section">
+            <h3>💡 คำแนะนำและเทคนิคการฝึกทำข้อสอบ</h3>
+            <div class="tips-grid">
+                <div class="tip-box">
+                    <h4>⏱️ จำลองสถานการณ์จริง</h4>
+                    <p>ลองกำหนดเวลาในการทำข้อสอบ เช่น ข้อละ 1 - 1.5 นาที เพื่อฝึกบริหารเวลาในห้องสอบจริงได้อย่างมีประสิทธิภาพ</p>
+                </div>
+                <div class="tip-box">
+                    <h4>📝 อ่านคำอธิบายเฉลยทุกข้อ</h4>
+                    <p>เมื่อทำแบบฝึกหัดเสร็จ ไม่ว่าจะตอบถูกหรือผิด ควรอ่านคำอธิบายเฉลยเพื่อเสริมความเข้าใจในทฤษฎีและประเด็นที่มักออกหลอก</p>
+                </div>
+                <div class="tip-box">
+                    <h4>🔄 ทำซ้ำข้อที่ตอบผิด</h4>
+                    <p>จดบันทึกหัวข้อที่ยังไม่แม่นยำ แล้วกลับมาทำแบบฝึกหัดซ้ำจนกว่าจะได้คะแนนเต็ม 100%</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p><strong>Grade 7 Final Exam Practice Hub</strong> • แหล่งรวบรวมข้อสอบเตรียมสอบปลายภาค ม.1</p>
+            <div class="footer-links">
+                <a href="bio.html">ชีววิทยา</a> • 
+                <a href="chem.html">เคมี/วิทย์ 1</a> • 
+                <a href="math.html">คณิตศาสตร์</a> • 
+                <a href="thai.html">ภาษาไทย</a> • 
+                <a href="history.html">ประวัติศาสตร์</a> • 
+                <a href="eco.html">เศรษฐศาสตร์</a> • 
+                <a href="eng.html">SMART ENG</a>
+            </div>
+            <p style="font-size: 0.8rem; opacity: 0.75;">
+                Hosted on <a href="https://github.com/zannmansotuff/test" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">GitHub Pages</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        // Dark Mode Logic
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                setTheme('dark');
+            } else {
+                setTheme('light');
+            }
+        }
+
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.getElementById('themeIcon').textContent = '☀️';
+                document.getElementById('themeText').textContent = 'โหมดสว่าง';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+                document.getElementById('themeIcon').textContent = '🌙';
+                document.getElementById('themeText').textContent = 'โหมดมืด';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        function toggleGlobalTheme() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            setTheme(isDark ? 'light' : 'dark');
+        }
+
+        // Category Filter
+        let currentFilter = 'all';
+
+        function filterCategory(category) {
+            currentFilter = category;
+            
+            // Update active chip
+            const chips = document.querySelectorAll('.filter-chip');
+            chips.forEach(chip => {
+                const clickAttr = chip.getAttribute('onclick');
+                if (clickAttr.includes(`'${category}'`)) {
+                    chip.classList.add('active');
+                } else {
+                    chip.classList.remove('active');
+                }
+            });
+
+            applyFilters();
+        }
+
+        // Search and Filter Application
+        function handleSearch() {
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const query = (document.getElementById('searchInput').value || '').trim().toLowerCase();
+            const cards = document.querySelectorAll('.subject-card');
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const cat = card.getAttribute('data-category');
+                const keywords = (card.getAttribute('data-keywords') || '').toLowerCase();
+                const title = card.querySelector('.card-title').textContent.toLowerCase();
+                const instructor = card.querySelector('.card-instructor').textContent.toLowerCase();
+                const desc = card.querySelector('.card-desc').textContent.toLowerCase();
+
+                const matchesCategory = (currentFilter === 'all') || (cat === currentFilter);
+                const matchesSearch = !query || 
+                    title.includes(query) || 
+                    instructor.includes(query) || 
+                    desc.includes(query) || 
+                    keywords.includes(query);
+
+                if (matchesCategory && matchesSearch) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            const noResults = document.getElementById('noResults');
+            if (visibleCount === 0) {
+                noResults.style.display = 'block';
+            } else {
+                noResults.style.display = 'none';
+            }
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+        });
+    </script>
+</body>
+</html>

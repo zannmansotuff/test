@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMART ENG 1 - Final Exam Practice (ครูวศิน)</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #0f172a;
+            --subtext-color: #475569;
+            --primary-color: #4f46e5;
+            --primary-hover: #4338ca;
+            --border-color: #e2e8f0;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+            --header-bg: #1e1b4b;
+            --header-text: #ffffff;
+            --badge-bg: #e0e7ff;
+            --badge-text: #3730a3;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #090d16;
+            --card-bg: #1e1b4b;
+            --text-color: #f8fafc;
+            --subtext-color: #a5b4fc;
+            --primary-color: #818cf8;
+            --primary-hover: #6366f1;
+            --border-color: #312e81;
+            --success-color: #34d399;
+            --error-color: #f87171;
+            --header-bg: #030712;
+            --header-text: #f8fafc;
+            --badge-bg: #312e81;
+            --badge-text: #c7d2fe;
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: background-color 0.25s, color 0.25s, border-color 0.25s;
+        }
+
+        body {
+            font-family: 'Sarabun', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        header p {
+            margin: 4px 0 0 0;
+            font-size: 0.9rem;
+            opacity: 0.85;
+        }
+
+        .theme-toggle-btn {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .theme-toggle-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.8rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            margin-top: 0;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.6rem;
+            font-size: 1.25rem;
+        }
+
+        ul {
+            padding-left: 1.2rem;
+            margin-bottom: 0;
+        }
+
+        li {
+            margin-bottom: 0.6rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: var(--badge-bg);
+            color: var(--badge-text);
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+
+        .question {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .option-btn {
+            width: 100%;
+            text-align: left;
+            background-color: transparent;
+            border: 1.5px solid var(--border-color);
+            color: var(--text-color);
+            padding: 0.9rem 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--primary-color);
+            background-color: var(--bg-color);
+        }
+
+        .option-btn.correct {
+            background-color: var(--success-color) !important;
+            color: #ffffff !important;
+            border-color: var(--success-color) !important;
+        }
+
+        .option-btn.wrong {
+            background-color: var(--error-color) !important;
+            color: #ffffff !important;
+            border-color: var(--error-color) !important;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 1.5rem;
+        }
+
+        .next-btn, .restart-btn {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .next-btn:hover, .restart-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .score-board {
+            text-align: center;
+            padding: 1.5rem 0;
+        }
+
+        .score-board h3 {
+            font-size: 1.8rem;
+            margin: 0 0 0.5rem 0;
+            color: var(--primary-color);
+        }
+
+        .score-board p {
+            color: var(--subtext-color);
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <h1>วิชา ภาษาอังกฤษเพิ่มเติมสมาร์ท 1 (ครูวศิน)</h1>
+            <p>สำหรับนักเรียน SMART ENG | แบบทดสอบ 20 ข้อ</p>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+            <a href="index.html" class="theme-toggle-btn" style="text-decoration: none; background-color: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.35);">
+                <span>🏠</span> <span>หน้าหลัก</span>
+            </a>
+            <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">
+                <span id="themeIcon">🌙</span> <span id="themeText">Dark Mode</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Topic Card -->
+        <div class="card">
+            <h2>ขอบเขตเนื้อหาข้อสอบปลายภาค (20 ข้อ)</h2>
+            <ul>
+                <li><strong>Present Simple vs Present Continuous Tense:</strong> กิจวัตรประจำวัน / ความจริง vs เหตุการณ์ที่กำลังเกิดขึ้นขณะนี้</li>
+                <li><strong>Past Simple Tense:</strong> เหตุการณ์ที่เกิดขึ้นและจบลงแล้วในอดีต (Verb 2 / Signal words)</li>
+                <li><strong>Future Simple Tense:</strong> ความต่างระหว่างการใช้ <em>Will</em> (ตัดสินใจทันที/คาดเดา) กับ <em>Be going to</em> (วางแผนไว้ล่วงหน้า/มีหลักฐาน)</li>
+            </ul>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="card">
+            <span class="badge" id="quiz-progress">ข้อที่ 1 จาก 20</span>
+            <div id="quiz-box">
+                <div class="question" id="question-text">กำลังโหลดคำถาม...</div>
+                <div class="options-list" id="options-container"></div>
+                <div class="controls">
+                    <button class="next-btn" id="next-btn" onclick="nextQuestion()" style="display: none;">Next Question ➔</button>
+                </div>
+            </div>
+
+            <!-- Score Results -->
+            <div id="score-box" class="score-board" style="display: none;">
+                <h3 id="score-title">Calculating score...</h3>
+                <p id="score-subtitle">คุณทำแบบทดสอบวิชา SMART ENG 1 ครบถ้วนแล้ว!</p>
+                <button class="restart-btn" onclick="restartQuiz()">Try Again 🔄</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const questions = [
+            // Present Simple vs Present Continuous
+            {
+                question: "1. Listen! The teacher ________ to the students right now.",
+                options: ["speaks", "is speaking", "spoke", "will speak"],
+                answer: 1
+            },
+            {
+                question: "2. My father usually ________ coffee in the morning, but today he ________ tea.",
+                options: ["drinks / is drinking", "is drinking / drinks", "drink / drink", "drinks / drank"],
+                answer: 0
+            },
+            {
+                question: "3. Water ________ at 100 degrees Celsius.",
+                options: ["boils", "is boiling", "boiled", "will boil"],
+                answer: 0
+            },
+            {
+                question: "4. Where ________ you ________ at the moment?",
+                options: ["do / go", "are / going", "did / go", "will / go"],
+                answer: 1
+            },
+            {
+                question: "5. She ________ like seafood because she is allergic to it.",
+                options: ["doesn't", "isn't", "don't", "didn't"],
+                answer: 0
+            },
+            {
+                question: "6. Look at the cat! It ________ up the tree.",
+                options: ["climbs", "is climbing", "climbed", "will climb"],
+                answer: 1
+            },
+            {
+                question: "7. How often ________ your brother play football?",
+                options: ["is", "do", "does", "did"],
+                answer: 2
+            },
+            {
+                question: "8. Be quiet! The baby ________ in his bedroom.",
+                options: ["sleeps", "is sleeping", "slept", "was sleeping"],
+                answer: 1
+            },
+
+            // Past Simple Tense
+            {
+                question: "9. They ________ a great movie at the cinema last night.",
+                options: ["watch", "are watching", "watched", "will watch"],
+                answer: 2
+            },
+            {
+                question: "10. Shakespeare ________ many famous plays hundreds of years ago.",
+                options: ["writes", "wrote", "has written", "was writing"],
+                answer: 1
+            },
+            {
+                question: "11. ________ you finish your homework yesterday afternoon?",
+                options: ["Do", "Does", "Did", "Were"],
+                answer: 2
+            },
+            {
+                question: "12. I didn't ________ Tom at the party two days ago.",
+                options: ["see", "saw", "seen", "seeing"],
+                answer: 0
+            },
+            {
+                question: "13. We ________ to Japan during the summer holiday last year.",
+                options: ["go", "went", "going", "have gone"],
+                answer: 1
+            },
+            {
+                question: "14. My mother ________ buy the dress because it was too expensive.",
+                options: ["doesn't", "isn't", "didn't", "won't"],
+                answer: 2
+            },
+
+            // Future Simple (Will vs Be going to)
+            {
+                question: "15. Look at those dark black clouds in the sky! It ________ rain.",
+                options: ["will", "is going to", "rains", "rained"],
+                answer: 1
+            },
+            {
+                question: "16. A: 'The phone is ringing!' \nB: 'Don't worry, I ________ answer it.'",
+                options: ["will", "am going to", "answered", "answers"],
+                answer: 0
+            },
+            {
+                question: "17. A: 'Why are you holding a bucket of water?' \nB: 'I ________ wash my car.'",
+                options: ["will", "am going to", "washed", "was washing"],
+                answer: 1
+            },
+            {
+                question: "18. I think scientists ________ find a cure for cancer in the future.",
+                options: ["will", "are going to", "found", "finds"],
+                answer: 0
+            },
+            {
+                question: "19. We have already bought our plane tickets. We ________ visit London next month.",
+                options: ["will", "are going to", "visited", "visiting"],
+                answer: 1
+            },
+            {
+                question: "20. I promise I ________ tell anyone your secret.",
+                options: ["won't", "am not going to", "don't", "didn't"],
+                answer: 0
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        const questionElement = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const nextButton = document.getElementById('next-btn');
+        const quizBox = document.getElementById('quiz-box');
+        const scoreBox = document.getElementById('score-box');
+        const progressElement = document.getElementById('quiz-progress');
+
+        function loadQuestion() {
+            const currentQ = questions[currentQuestionIndex];
+            progressElement.style.display = 'inline-block';
+            progressElement.textContent = `ข้อที่ ${currentQuestionIndex + 1} จาก ${questions.length}`;
+            questionElement.textContent = currentQ.question;
+            optionsContainer.innerHTML = '';
+            nextButton.style.display = 'none';
+
+            currentQ.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.classList.add('option-btn');
+                button.onclick = () => selectOption(index, button);
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        function selectOption(selectedIndex, selectedBtn) {
+            const currentQ = questions[currentQuestionIndex];
+            const buttons = optionsContainer.getElementsByClassName('option-btn');
+
+            for (let btn of buttons) {
+                btn.disabled = true;
+            }
+
+            if (selectedIndex === currentQ.answer) {
+                selectedBtn.classList.add('correct');
+                score++;
+            } else {
+                selectedBtn.classList.add('wrong');
+                buttons[currentQ.answer].classList.add('correct');
+            }
+
+            nextButton.style.display = 'block';
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            quizBox.style.display = 'none';
+            progressElement.style.display = 'none';
+            scoreBox.style.display = 'block';
+            document.getElementById('score-title').textContent = `Your Score: ${score} / ${questions.length}`;
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            quizBox.style.display = 'block';
+            scoreBox.style.display = 'none';
+            loadQuestion();
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.body.getAttribute('data-theme');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+
+            if (currentTheme === 'dark') {
+                document.body.removeAttribute('data-theme');
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Dark Mode';
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Light Mode';
+            }
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>

@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบฝึกหัดเตรียมสอบปลายภาค - การลำเลียงและการสืบพันธุ์ของพืช (30 ข้อ)</title>
+    <style>
+        :root {
+            --bg-color: #f0fdf4;
+            --card-bg: #ffffff;
+            --text-color: #0f172a;
+            --subtext-color: #475569;
+            --primary-color: #16a34a;
+            --primary-hover: #15803d;
+            --border-color: #bbf7d0;
+            --success-color: #22c55e;
+            --error-color: #ef4444;
+            --header-bg: #14532d;
+            --header-text: #ffffff;
+            --badge-bg: #dcfce7;
+            --badge-text: #14532d;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #052e16;
+            --card-bg: #14532d;
+            --text-color: #f8fafc;
+            --subtext-color: #86efac;
+            --primary-color: #4ade80;
+            --primary-hover: #22c55e;
+            --border-color: #166534;
+            --success-color: #4ade80;
+            --error-color: #f87171;
+            --header-bg: #022c22;
+            --header-text: #f8fafc;
+            --badge-bg: #166534;
+            --badge-text: #bbf7d0;
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: background-color 0.25s, color 0.25s, border-color 0.25s;
+        }
+
+        body {
+            font-family: 'Sarabun', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        header p {
+            margin: 4px 0 0 0;
+            font-size: 0.9rem;
+            opacity: 0.85;
+        }
+
+        .theme-toggle-btn {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .theme-toggle-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.8rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            margin-top: 0;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.6rem;
+            font-size: 1.25rem;
+        }
+
+        ul {
+            padding-left: 1.2rem;
+            margin-bottom: 0;
+        }
+
+        li {
+            margin-bottom: 0.4rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: var(--badge-bg);
+            color: var(--badge-text);
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+
+        .question {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .option-btn {
+            width: 100%;
+            text-align: left;
+            background-color: transparent;
+            border: 1.5px solid var(--border-color);
+            color: var(--text-color);
+            padding: 0.9rem 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--primary-color);
+            background-color: var(--bg-color);
+        }
+
+        .option-btn.correct {
+            background-color: var(--success-color) !important;
+            color: #ffffff !important;
+            border-color: var(--success-color) !important;
+        }
+
+        .option-btn.wrong {
+            background-color: var(--error-color) !important;
+            color: #ffffff !important;
+            border-color: var(--error-color) !important;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 1.5rem;
+        }
+
+        .next-btn, .restart-btn {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .next-btn:hover, .restart-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .score-board {
+            text-align: center;
+            padding: 1.5rem 0;
+        }
+
+        .score-board h3 {
+            font-size: 1.8rem;
+            margin: 0 0 0.5rem 0;
+            color: var(--primary-color);
+        }
+
+        .score-board p {
+            color: var(--subtext-color);
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <h1>เนื้อหาข้อสอบปลายภาค (ครูธัญญรัตน์ ยาดยอด)</h1>
+            <p>เรื่อง การลำเลียงสารในพืช & การสืบพันธุ์ของพืช | ทั้งหมด 30 ข้อ</p>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+            <a href="index.html" class="theme-toggle-btn" style="text-decoration: none; background-color: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.35);">
+                <span>🏠</span> <span>หน้าหลัก</span>
+            </a>
+            <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">
+                <span id="themeIcon">🌙</span> <span id="themeText">Dark Mode</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Topic Card -->
+        <div class="card">
+            <h2>ขอบเขตเนื้อหาตามประกาศ</h2>
+            <ul>
+                <li><strong>การลำเลียงสารในพืช (หน้า 81 - 90):</strong> ท่อลำเลียงน้ำ (Xylem), ท่อลำเลียงอาหาร (Phloem), การคายน้ำ, แรงดึงจากการคายน้ำ (Transpiration pull), แรงดันราก (Root pressure)</li>
+                <li><strong>การสืบพันธุ์ของพืช (หน้า 95 - 103):</strong> โครงสร้างดอก, การปฏิสนธิซ้อน (Double Fertilization), การเจริญเป็นเมล็ดและผล, การสืบพันธุ์แบบไม่อาศัยเพศ</li>
+                <li><strong>จำนวนข้อสอบ:</strong> 30 ข้อ</li>
+            </ul>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="card">
+            <span class="badge" id="quiz-progress">ข้อที่ 1 จาก 30</span>
+            <div id="quiz-box">
+                <div class="question" id="question-text">กำลังโหลดคำถาม...</div>
+                <div class="options-list" id="options-container"></div>
+                <div class="controls">
+                    <button class="next-btn" id="next-btn" onclick="nextQuestion()" style="display: none;">ข้อถัดไป ➔</button>
+                </div>
+            </div>
+
+            <!-- Score Results -->
+            <div id="score-box" class="score-board" style="display: none;">
+                <h3 id="score-title">คำนวณคะแนน...</h3>
+                <p id="score-subtitle">คุณทำแบบทดสอบทบทวนเนื้อหาปลายภาคครบ 30 ข้อแล้ว!</p>
+                <button class="restart-btn" onclick="restartQuiz()">ทำแบบทดสอบอีกครั้ง 🔄</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const questions = [
+            // Part 1: การลำเลียงสารในพืช (ข้อ 1 - 15)
+            {
+                question: "1. เนื้อเยื่อท่อลำเลียงชนิดใดทำหน้าที่ลำเลียงน้ำและแร่ธาตุจากรากขึ้นสู่ส่วนต่างๆ ของพืช?",
+                options: ["Phloem (โฟลเอ็ม)", "Xylem (ไซเล็ม)", "Epidermis (เอพิเดอร์มิส)", "Cortex (คอร์เทกซ์)"],
+                answer: 1
+            },
+            {
+                question: "2. การลำเลียงอาหาร (น้ำตาลซูโครส) ในพืช เกิดขึ้นผ่านเนื้อเยื่อท่อลำเลียงชนิดใด?",
+                options: ["Xylem", "Phloem", "Pith", "Cambium"],
+                answer: 1
+            },
+            {
+                question: "3. แรงหลักที่สำคัญที่สุดในการดึงน้ำจากรากขึ้นสู่ยอดพืชต้นสูงๆ คือแรงใด?",
+                options: ["แรงดันราก (Root pressure)", "แรงดึงจากการคายน้ำ (Transpiration pull)", "แรงแคพิลลารี (Capillary action)", "แรงดันออสโมซิส"],
+                answer: 1
+            },
+            {
+                question: "4. แรงยึดเหนี่ยวระหว่างโมเลกุลน้ำกับโมเลกุลน้ำด้วยกันเอง เรียกว่าอะไร?",
+                options: ["Adhesion", "Cohesion", "Osmosis", "Diffusion"],
+                answer: 1
+            },
+            {
+                question: "5. แรงยึดเหนี่ยวระหว่างโมเลกุลน้ำกับผนังท่อลำเลียงไซเล็ม เรียกว่าอะไร?",
+                options: ["Adhesion", "Cohesion", "Guttation", "Transpiration"],
+                answer: 0
+            },
+            {
+                question: "6. ปรากฏการณ์ที่น้ำหลุดออกมาเป็นหยดน้ำทางรูหยาดน้ำ (Hydathode) ขอบใบในตอนเช้าตรู่ เรียกว่าอะไร?",
+                options: ["Transpiration (การคายน้ำ)", "Guttation (กัทเทชัน)", "Osmosis (ออสโมซิส)", "Diffusion (การแพร่)"],
+                answer: 1
+            },
+            {
+                question: "7. ปรากฏการณ์ Guttation เกิดจากแรงใดเป็นหลัก?",
+                options: ["แรงดึงจากการคายน้ำ", "แรงดันราก (Root pressure)", "แรงดันเต่ง", "แรงลม"],
+                answer: 1
+            },
+            {
+                question: "8. การเปิด-ปิดของปากใบ (Stomata) ควบคุมโดยเซลล์ชนิดใด?",
+                options: ["Epidermal cell", "Guard cell (เซลล์คุม)", "Companion cell", "Sieve tube element"],
+                answer: 1
+            },
+            {
+                question: "9. ปัจจัยใดต่อไปนี้ทำให้อัตราการคายน้ำของพืช **ลดลง**?",
+                options: ["ความชื้นสัมพัทธ์ในอากาศสูง", "อุณหภูมิของอากาศสูง", "ความเข้มแสงสูง", "กระแสลมพัดแรง"],
+                answer: 0
+            },
+            {
+                question: "10. น้ำและแร่ธาตุเข้าสู่เซลล์ขนราก (Root hair cell) โดยกระบวนการใดตามลำดับ?",
+                options: ["น้ำเข้าโดยออสโมซิส, แร่ธาตุเข้าโดยการแพร่/Active transport", "น้ำเข้าโดยการแพร่, แร่ธาตุเข้าโดยออสโมซิส", "ทั้งน้ำและแร่ธาตุเข้าโดย Active transport เท่านั้น", "น้ำเข้าโดย Active transport, แร่ธาตุเข้าโดยออสโมซิส"],
+                answer: 0
+            },
+            {
+                question: "11. การลำเลียงน้ำแบบผ่านเซลล์หนึ่งไปยังอีกเซลล์หนึ่งทางช่องพลาสโมเดสมาตา (Plasmodesmata) เรียกว่าอะไร?",
+                options: ["Apoplast pathway", "Symplast pathway", "Transmembrane pathway", "Active transport"],
+                answer: 1
+            },
+            {
+                question: "12. การลำเลียงน้ำผ่านผนังเซลล์และช่องว่างระหว่างเซลล์โดยไม่ผ่านเยื่อหุ้มเซลล์ เรียกว่าอะไร?",
+                options: ["Symplast pathway", "Apoplast pathway", "Transmembrane pathway", "Osmosis pathway"],
+                answer: 1
+            },
+            {
+                question: "13. แถบแคสพาเรียน (Casparian strip) ที่ชั้นเอนโดเดอร์มิส สกัดกั้นการลำเลียงน้ำแบบใด?",
+                options: ["Symplast pathway", "Apoplast pathway", "Vascular pathway", "Phloem pathway"],
+                answer: 1
+            },
+            {
+                question: "14. อาหารที่พืชสร้างขึ้นจากกระบวนการสังเคราะห์ด้วยแสงจะถูกเปลี่ยนเป็นสารใดก่อนลำเลียงผ่านโฟลเอ็ม?",
+                options: ["แป้ง (Starch)", "น้ำตาลซูโครส (Sucrose)", "กลูโคส (Glucose)", "เซลลูโลส (Cellulose)"],
+                answer: 1
+            },
+            {
+                question: "15. เซลลูโลสและลิกนินเป็นสารที่พบมากในผนังเซลล์ของท่อลำเลียงใดที่ทำให้ท่อแข็งแรง?",
+                options: ["Sieve tube element", "Companion cell", "Xylem vessel / Tracheid", "Parenchyma"],
+                answer: 2
+            },
+
+            // Part 2: การสืบพันธุ์ของพืชดอก (ข้อ 16 - 30)
+            {
+                question: "16. ส่วนประกอบของดอกไม้ที่ทำหน้าที่สร้างเซลล์สืบพันธุ์เพศผู้คือข้อใด?",
+                options: ["เกสรเพศเมีย (Pistil)", "เกสรเพศผู้ (Stamen)", "กลีบดอก (Petal)", "กลีบเลี้ยง (Sepal)"],
+                answer: 1
+            },
+            {
+                question: "17. ดอกที่มีส่วนประกอบครบ 4 ชั้น (กลีบเลี้ยง, กลีบดอก, เกสรเพศผู้, เกสรเพศเมีย) เรียกว่าอะไร?",
+                options: ["ดอกไม่สมบูรณ์ (Incomplete flower)", "ดอกสมบูรณ์ (Complete flower)", "ดอกสมบูรณ์เพศ (Perfect flower)", "ดอกไม่สมบูรณ์เพศ"],
+                answer: 1
+            },
+            {
+                question: "18. ละอองเรณู (Pollen grain) เปรียบได้กับระยะใดในวัฏจักรชีวิตของพืช?",
+                options: ["สปอโรไฟต์ (Sporophyte)", "แกมีโทไฟต์เพศผู้ (Male gametophyte)", "แกมีโทไฟต์เพศเมีย (Female gametophyte)", "ไซโกต (Zygote)"],
+                answer: 1
+            },
+            {
+                question: "19. ถุงเอ็มบริโอ (Embryo sac) ในรังไข่ เปรียบได้กับระยะใด?",
+                options: ["สปอโรไฟต์", "แกมีโทไฟต์เพศเมีย", "เซลล์สืบพันธุ์เพศผู้", "เอ็มบริโอ"],
+                answer: 1
+            },
+            {
+                question: "20. ในกระบวนการปฏิสนธิซ้อน (Double Fertilization) สเปิร์มตัวที่ 1 รวมกับเซลล์ไข่ (Egg cell) ได้สิ่งใด?",
+                options: ["เอนโดสเปิร์ม (Endosperm 3n)", "ไซโกต (Zygote 2n)", "ผนังหุ้มเมล็ด", "รังไข่"],
+                answer: 1
+            },
+            {
+                question: "21. สเปิร์มตัวที่ 2 รวมกับโพลาร์นิวคลีไอ (Polar nuclei 2n) จะได้สิ่งใด ซึ่งทำหน้าที่เป็นอาหารเลี้ยงเอ็มบริโอ?",
+                options: ["ไซโกต (Zygote 2n)", "เอนโดสเปิร์ม (Endosperm 3n)", "เปลือกหุ้มเมล็ด", "เนื้อผลไม้"],
+                answer: 1
+            },
+            {
+                question: "22. หลังจากการปฏิสนธิ 'ออวุล (Ovule)' จะเจริญเปลี่ยนแปลงไปเป็นสิ่งใด?",
+                options: ["ผล (Fruit)", "เมล็ด (Seed)", "เปลือกผล (Pericarp)", "ใบเลี้ยง (Cotyledon)"],
+                answer: 1
+            },
+            {
+                question: "23. หลังจากการปฏิสนธิ 'รังไข่ (Ovary)' จะเจริญเปลี่ยนแปลงไปเป็นสิ่งใด?",
+                options: ["เมล็ด (Seed)", "ผล (Fruit)", "เปลือกหุ้มเมล็ด (Seed coat)", "เอ็มบริโอ (Embryo)"],
+                answer: 1
+            },
+            {
+                question: "24. ส่วนของผลที่เจริญมาจากผนังรังไข่ (Ovary wall) เรียกว่าอะไร?",
+                options: ["เปลือกหุ้มเมล็ด (Seed coat)", "เพริคาร์ป (Pericarp)", "เอนโดสเปิร์ม (Endosperm)", "ขั้วเมล็ด"],
+                answer: 1
+            },
+            {
+                question: "25. ข้อใดจัดเป็น 'ผลเดี่ยว' (Simple fruit)?",
+                options: ["ส้ม, สับปะรด", "มะม่วง, ส้ม, สตรอเบอร์รี่ (ผลเดี่ยวจาก 1 ดอก 1 รังไข่)", "สับปะรด, ยอ", "น้อยหน่า, นมแมว"],
+                answer: 1
+            },
+            {
+                question: "26. สับปะรด และ ยอ จัดเป็นผลประเภทใด ซึ่งเกิดจากดอกย่อยหลายๆ ดอกบนช่อดอกเดียวกัน?",
+                options: ["ผลเดี่ยว (Simple fruit)", "ผลกลุ่ม (Aggregate fruit)", "ผลรวม (Multiple fruit)", "ผลเทียม (Accessory fruit)"],
+                answer: 2
+            },
+            {
+                question: "27. น้อยหน่า และ สตรอเบอร์รี่ เกิดจาก 1 ดอกที่มีหลายรังไข่แยกกัน จัดเป็นผลประเภทใด?",
+                options: ["ผลเดี่ยว (Simple fruit)", "ผลกลุ่ม (Aggregate fruit)", "ผลรวม (Multiple fruit)", "ผลสด"],
+                answer: 1
+            },
+            {
+                question: "28. โครงสร้างภายในเมล็ดที่เจริญเติบโตไปเป็นต้นพืชต้นใหม่ เรียกว่าอะไร?",
+                options: ["Endosperm", "Embryo (เอ็มบริโอ)", "Seed coat", "Micropyle"],
+                answer: 1
+            },
+            {
+                question: "29. การงอกของเมล็ดต้องอาศัยปัจจัยภายนอกที่สำคัญที่สุด 3 ประการคือข้อใด?",
+                options: ["น้ำ/ความชื้น, ออกซิเจน, อุณหภูมิที่เหมาะสม", "น้ำ, คาร์บอนไดออกไซด์, แสงแดด", "ปุ๋ย, ดิน, แสงแดด", "ออกซิเจน, คาร์บอนไดออกไซด์, ดิน"],
+                answer: 0
+            },
+            {
+                question: "30. การติดตา การตอนกิ่ง และการเพาะเลี้ยงเนื้อเยื่อ จัดเป็นการสืบพันธุ์แบบใดของพืช?",
+                options: ["การสืบพันธุ์แบบอาศัยเพศ (Sexual reproduction)", "การสืบพันธุ์แบบไม่อาศัยเพศ (Asexual reproduction)", "การปฏิสนธิซ้อน (Double fertilization)", "การถ่ายเรณู (Pollination)"],
+                answer: 1
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        const questionElement = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const nextButton = document.getElementById('next-btn');
+        const quizBox = document.getElementById('quiz-box');
+        const scoreBox = document.getElementById('score-box');
+        const progressElement = document.getElementById('quiz-progress');
+
+        function loadQuestion() {
+            const currentQ = questions[currentQuestionIndex];
+            progressElement.style.display = 'inline-block';
+            progressElement.textContent = `ข้อที่ ${currentQuestionIndex + 1} จาก ${questions.length}`;
+            questionElement.textContent = currentQ.question;
+            optionsContainer.innerHTML = '';
+            nextButton.style.display = 'none';
+
+            currentQ.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.classList.add('option-btn');
+                button.onclick = () => selectOption(index, button);
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        function selectOption(selectedIndex, selectedBtn) {
+            const currentQ = questions[currentQuestionIndex];
+            const buttons = optionsContainer.getElementsByClassName('option-btn');
+
+            for (let btn of buttons) {
+                btn.disabled = true;
+            }
+
+            if (selectedIndex === currentQ.answer) {
+                selectedBtn.classList.add('correct');
+                score++;
+            } else {
+                selectedBtn.classList.add('wrong');
+                buttons[currentQ.answer].classList.add('correct');
+            }
+
+            nextButton.style.display = 'block';
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            quizBox.style.display = 'none';
+            progressElement.style.display = 'none';
+            scoreBox.style.display = 'block';
+            document.getElementById('score-title').textContent = `คะแนนของคุณ: ${score} / ${questions.length}`;
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            quizBox.style.display = 'block';
+            scoreBox.style.display = 'none';
+            loadQuestion();
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.body.getAttribute('data-theme');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+
+            if (currentTheme === 'dark') {
+                document.body.removeAttribute('data-theme');
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Dark Mode';
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Light Mode';
+            }
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>
